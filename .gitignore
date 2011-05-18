@@ -1,0 +1,7 @@
+*~
+*.pyc
+.noseids
+bin/
+include/
+lib/
+sudoku.egg-info/
