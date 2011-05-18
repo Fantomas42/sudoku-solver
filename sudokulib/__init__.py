@@ -9,5 +9,8 @@ class SudokuSolver(object):
         self.free_char = free_char
         self.grid = Grid(filename, self.free_char)
 
+    def run(self):
+        self.grid.apply_solution(4, 2)
+
     def __str__(self):
         return self.grid.__str__()

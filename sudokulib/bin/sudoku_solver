@@ -4,7 +4,7 @@ from optparse import OptionParser
 
 from sudokulib import SudokuSolver
 
-if __name__ == '__main__':   
+if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
     parser.add_option('-f', '--free', dest='free_char', type='string',
                       help='The character signaling free place', default='.')
@@ -16,5 +16,9 @@ if __name__ == '__main__':
     source = args[0]
 
     solver = SudokuSolver(source, options.free_char)
-    
-    print solver,
+    print '%s items missing' % solver.grid.missing
+    solver.run()
+
+    print solver
+    print '%s items missing' % solver.grid.missing
+
