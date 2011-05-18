@@ -61,15 +61,21 @@ class Grid(object):
         i = 0
         for c in self.data:
             if i and not i % GRID_WIDTH:
-                string.append('\n%s\n' % ('-' * (GRID_WIDTH * 4)))
+                string.append('\n')
+            if i and not i % (GRID_WIDTH * 3):
+                string.append('%s\n' % ('-' * (GRID_WIDTH * 3 + 2)))
+
+            if not i % 3 and i % GRID_WIDTH:
+                string.append('|')
+
             if c == self.mystery_char:
                 if self.data_solution[i] != self.mystery_char:
-                    string.append('| \033[1;32m%s\033[0m ' % \
+                    string.append(' \033[1;32m%s\033[0m ' % \
                                   self.data_solution[i])
                 else:
-                    string.append('| \033[1;31m%s\033[0m ' % c)
+                    string.append(' \033[1;31m%s\033[0m ' % c)
             else:
-                string.append('| %s ' % c)
+                string.append(' %s ' % c)
             i += 1
 
         return ''.join(string)
