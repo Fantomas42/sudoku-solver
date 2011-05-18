@@ -1,29 +1,20 @@
 """sudokulib grid"""
+import string
+
+GRID_WIDTH = 9
+GRID_TOTAL = 81
 
 
 class Grid(object):
     """Grid of Sudoku"""
 
     def __init__(self, filename, free_char, mystery_char='X'):
+        self.filename = filename
         self.free_char = free_char
         self.mystery_char = mystery_char
 
-        # Load the datas from a file
-        self.filename = filename
-        source = open(filename, 'r')
-        self.data_table = [l.strip() for l in source.readlines()]
-        source.close()
+        self.data = self.load_source()
 
-        # Check the source and compute dimensions
-        self.height = len(self.data_table)
-        self.width = len(self.data_table[0])
-        self.check_source()
-
-        # Init the string of data
-        self.data = ''.join(self.data_table)
-        self.data = self.data.replace(self.free_char, self.mystery_char)
-
-        # Init the string of solution
         self.data_solution = ''
         for c in self.data:
             if c == self.mystery_char:
@@ -45,22 +36,32 @@ class Grid(object):
         solution_list[index] = str(solution)
         self.data_solution = ''.join(solution_list)
 
-    def check_source(self):
-        """Check if the source file is valid"""
-        if self.height != self.width:
+    def load_source(self):
+        """Load the data from a source"""
+        source = open(self.filename, 'r')
+        source_data = source.read()
+        source.close()
+
+        data = ''
+        for c in source_data:
+            if c in string.digits + self.free_char:
+                if c in ('0', self.free_char):
+                    data += self.mystery_char
+                else:
+                    data += c
+
+        if len(data) != GRID_TOTAL:
             print u'Invalid source file'
             exit(1)
-        for line in self.data_table:
-            if self.width != len(line):
-                print u'Invalid source file'
-                exit(1)
+
+        return data
 
     def __str__(self):
         string = []
         i = 0
         for c in self.data:
-            if i and not i % self.width:
-                string.append('\n%s\n' % ('-' * (self.width * 4)))
+            if i and not i % GRID_WIDTH:
+                string.append('\n%s\n' % ('-' * (GRID_WIDTH * 4)))
             if c == self.mystery_char:
                 if self.data_solution[i] != self.mystery_char:
                     string.append('| \033[1;32m%s\033[0m ' % \

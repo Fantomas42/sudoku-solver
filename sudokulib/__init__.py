@@ -10,6 +10,7 @@ class SudokuSolver(object):
         self.grid = Grid(filename, self.free_char)
 
     def run(self):
+        # Apply a potential solution for testing
         self.grid.apply_solution(4, 2)
 
     def __str__(self):
