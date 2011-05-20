@@ -12,7 +12,7 @@ class Layer(object):
                 self.str += solution_str[i]
             else:
                 self.str += data_str[i]
-        
+
         self.row_table = []
         for i in range(GRID_WIDTH):
             self.row_table.append(list(self.str[i:i + GRID_WIDTH]))

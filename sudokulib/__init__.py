@@ -10,14 +10,13 @@ class SudokuSolver(object):
         self.grid = Grid(filename, self.free_char)
 
     def run(self):
-        
+
         while not self.grid.completed:
             layer = self.grid.layer
-            
+
             position, solution = self.process(layer)
             self.grid.apply_solution(position, solution)
-            self.grid.data_solution = ' ' * 81
-
+            self.grid.data_solution = ' ' * 81  # Provoque completed
 
     def process(self, layer):
         return 4, 2
