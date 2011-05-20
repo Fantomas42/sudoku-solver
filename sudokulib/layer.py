@@ -30,5 +30,16 @@ class Layer(object):
                 block_offset += GRID_WIDTH
             self.block_table.append(list(block))
 
+    def get_row(self, index):
+        return self.row_table[index / GRID_WIDTH]
+
+    def get_col(self, index):
+        return self.col_table[index % GRID_WIDTH]
+
+    def get_block(self, index):
+        x = ((index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH) + \
+            ((index % (BLOCK_WIDTH * GRID_WIDTH) / BLOCK_WIDTH) % BLOCK_WIDTH))
+        return self.block_table[x]
+
     def __str__(self):
         return self.str
