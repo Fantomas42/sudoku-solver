@@ -24,6 +24,7 @@ SOLUTION = '       8                         1       ' \
 #
 #  Note this is not a valid puzzle
 
+
 class LayerTestCase(TestCase):
 
     def setUp(self):
@@ -61,7 +62,7 @@ class LayerTestCase(TestCase):
                                                       '2', '3', '4',
                                                       '3', '4', '5'])
         self.assertEquals(self.layer.block_table[4], ['7', '8', '9',
-                                                      '8', '8', '1',
+                                                      '8', '9', '1',
                                                       '9', '1', '2'])
         self.assertEquals(self.layer.block_table[8], ['4', '5', '6',
                                                       '5', '6', '7',
