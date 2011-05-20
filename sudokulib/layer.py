@@ -7,6 +7,7 @@ class Layer(object):
     """Class layer for abstracting and manipulating Grid"""
 
     def __init__(self, data_str, solution_str, mystery_char='X'):
+        self.mystery_char = mystery_char
         self.str = ''
         for i in range(len(data_str)):
             if not solution_str[i] in (mystery_char, ' '):
