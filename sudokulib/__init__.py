@@ -1,25 +1,37 @@
 """sudokulib"""
 from sudokulib.grid import Grid
+from sudokulib.solvers import SingletonSolver
 
 
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
-    def __init__(self, filename, free_char='.'):
+    def __init__(self, filename, free_char='.',
+                 solvers=[SingletonSolver]):
+        self.solvers = solvers
         self.free_char = free_char
         self.grid = Grid(filename, self.free_char)
 
     def run(self):
-
+        """Launch the loop of processing"""
         while not self.grid.completed:
-            layer = self.grid.layer
+            #print self
+            #print '%s items missing' % self.grid.missing
+            position, solution = self.process()
+            if solution:
+                self.grid.apply_solution(position, solution)
+            else:
+                break
 
-            position, solution = self.process(layer)
-            self.grid.apply_solution(position, solution)
-            self.grid.data_solution = ' ' * 81  # Provoque completed
-
-    def process(self, layer):
-        return 4, 2
+    def process(self):
+        """Process the missing elements into the solvers"""
+        for i in range(len(self.grid)):
+            if self.grid.data_solution[i] == self.grid.mystery_char:
+                for solver_class in self.solvers:
+                    solution = solver_class(self.grid.layer, i).solve()
+                    if solution:
+                        return i, solution
+        return None, None
 
     def __str__(self):
         return self.grid.__str__()
