@@ -36,6 +36,9 @@ class Grid(object):
         return Layer(self.data, self.data_solution,
                      self.mystery_char)
 
+    def __len__(self):
+        return len(self.data)
+
     def apply_solution(self, index, solution):
         """Apply a solution in the solution data"""
         solution_list = list(self.data_solution)
