@@ -1,8 +1,9 @@
-"""sudokulib grid"""
+"""Grid for sudokulib"""
 import string
 
-GRID_WIDTH = 9
-GRID_TOTAL = 81
+from sudokulib.layer import Layer
+from sudokulib.constants import GRID_WIDTH
+from sudokulib.constants import GRID_TOTAL
 
 
 class Grid(object):
@@ -29,6 +30,11 @@ class Grid(object):
     @property
     def completed(self):
         return not self.mystery_char in self.data_solution
+
+    @property
+    def layer(self):
+        return Layer(self.data, self.data_solution,
+                     self.mystery_char)
 
     def apply_solution(self, index, solution):
         """Apply a solution in the solution data"""
