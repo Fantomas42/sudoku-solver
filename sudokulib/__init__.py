@@ -1,13 +1,14 @@
 """sudokulib"""
 from sudokulib.grid import Grid
 from sudokulib.solvers import SingletonSolver
+from sudokulib.solvers import NakedSingletonSolver
 
 
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
-                 solvers=[SingletonSolver]):
+                 solvers=[SingletonSolver, NakedSingletonSolver]):
         self.solvers = solvers
         self.free_char = free_char
         self.grid = Grid(filename, self.free_char)

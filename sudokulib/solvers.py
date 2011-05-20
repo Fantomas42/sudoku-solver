@@ -30,3 +30,14 @@ class SingletonSolver(BaseSolver):
             return (self.exclude_set - block_set).pop()
 
         return None
+
+
+class NakedSingletonSolver(BaseSolver):
+    """Naked Singleton Solver"""
+
+    def solve(self):
+        all_set = set(self.layer.get_row(self.index)) | \
+                  set(self.layer.get_col(self.index)) | \
+                  set(self.layer.get_block(self.index))
+        if len(all_set) == 9 and self.layer.mystery_char in all_set:
+            return (self.exclude_set - all_set).pop()
