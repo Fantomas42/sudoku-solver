@@ -56,9 +56,29 @@ class Layer(object):
     def get_region_missing_indexes(self, region, index):
         """Return the missing elements's indexes
         of a region from a grid index"""
+        offset = 0
         missing_indexes = []
-        region = self.get_region(region, index)
-        # TODO
+        regions = self.get_region(region, index)
+
+        if region == 'row':
+            offset = self.get_region_index(region, index) * GRID_WIDTH
+        elif region == 'col':
+            offset = self.get_region_index(region, index)
+        elif region == 'block':
+            offset = (index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH * GRID_WIDTH) + \
+                     ((index % (BLOCK_WIDTH * GRID_WIDTH) % GRID_WIDTH) / BLOCK_WIDTH) * BLOCK_WIDTH
+
+        for c in regions:
+            if c == self.mystery_char:
+                missing_indexes.append(offset)
+            if region in ('row', 'block'):
+                offset += 1
+                if region == 'block':
+                    if not offset % BLOCK_WIDTH:
+                        offset += BLOCK_WIDTH * 2
+            elif region == 'col':
+                offset += GRID_WIDTH
+
         return missing_indexes
 
     def get_excluded(self, index):
