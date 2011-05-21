@@ -129,3 +129,26 @@ class LayerTestCase(TestCase):
                           ['4', '5', '6',
                            '5', '6', '7',
                            '6', '7', '8'])
+
+    def test_get_region_index(self):
+        self.assertRaises(ValueError, self.layer.get_region_index,
+                          'toto', 12)
+        self.assertEquals(self.layer.get_region_index('row', 0), 0)
+        self.assertEquals(self.layer.get_region_index('col', 0), 0)
+        self.assertEquals(self.layer.get_region_index('block', 0), 0)
+
+        self.assertEquals(self.layer.get_region_index('row', 1), 0)
+        self.assertEquals(self.layer.get_region_index('col', 1), 1)
+        self.assertEquals(self.layer.get_region_index('block', 1), 0)
+
+        self.assertEquals(self.layer.get_region_index('row', 17), 1)
+        self.assertEquals(self.layer.get_region_index('col', 17), 8)
+        self.assertEquals(self.layer.get_region_index('block', 17), 2)
+
+        self.assertEquals(self.layer.get_region_index('row', 42), 4)
+        self.assertEquals(self.layer.get_region_index('col', 42), 6)
+        self.assertEquals(self.layer.get_region_index('block', 42), 5)
+
+        self.assertEquals(self.layer.get_region_index('row', 78), 8)
+        self.assertEquals(self.layer.get_region_index('col', 78), 6)
+        self.assertEquals(self.layer.get_region_index('block', 78), 8)
