@@ -152,3 +152,12 @@ class LayerTestCase(TestCase):
         self.assertEquals(self.layer.get_region_index('row', 78), 8)
         self.assertEquals(self.layer.get_region_index('col', 78), 6)
         self.assertEquals(self.layer.get_region_index('block', 78), 8)
+
+    def test_get_region_missing_indexes(self):
+        pass
+
+    def test_get_excluded(self):
+        pass
+
+    def test_get_candidates(self):
+        pass
