@@ -68,64 +68,64 @@ class LayerTestCase(TestCase):
                                                       '5', '6', '7',
                                                       '6', '7', '8'])
 
-    def test_get_row(self):
-        self.assertEquals(self.layer.get_row(1),
+    def test_get_region_row(self):
+        self.assertEquals(self.layer.get_region('row', 1),
                           ['1', '2', '3',
                            '4', '5', '6',
                            '7', '8', '9'])
-        self.assertEquals(self.layer.get_row(7),
+        self.assertEquals(self.layer.get_region('row', 7),
                           ['1', '2', '3',
                            '4', '5', '6',
                            '7', '8', '9'])
-        self.assertEquals(self.layer.get_row(37),
+        self.assertEquals(self.layer.get_region('row', 37),
                           ['5', '6', '7',
                            '8', '9', '1',
                            '2', '3', '4'])
-        self.assertEquals(self.layer.get_row(78),
+        self.assertEquals(self.layer.get_region('row', 78),
                           ['9', '1', '2',
                            '3', '4', '5',
                            '6', '7', '8'])
 
-    def test_get_col(self):
-        self.assertEquals(self.layer.get_col(0),
+    def test_get_region_col(self):
+        self.assertEquals(self.layer.get_region('col', 0),
                           ['1', '2', '3',
                            '4', '5', '6',
                            '7', '8', '9'])
-        self.assertEquals(self.layer.get_col(7),
+        self.assertEquals(self.layer.get_region('col', 7),
                           ['8', '9', '1',
                            '2', '3', '4',
                            '5', '6', '7'])
-        self.assertEquals(self.layer.get_col(37),
+        self.assertEquals(self.layer.get_region('col', 37),
                           ['2', '3', '4',
                            '5', '6', '7',
                            '8', '9', '1'])
-        self.assertEquals(self.layer.get_col(78),
+        self.assertEquals(self.layer.get_region('col', 78),
                           ['7', '8', '9',
                            '1', '2', '3',
                            '4', '5', '6'])
 
-    def test_get_block(self):
-        self.assertEquals(self.layer.get_block(1),
+    def test_get_region_block(self):
+        self.assertEquals(self.layer.get_region('block', 1),
                           ['1', '2', '3',
                            '2', '3', '4',
                            '3', '4', '5'])
-        self.assertEquals(self.layer.get_block(7),
+        self.assertEquals(self.layer.get_region('block', 7),
                           ['7', '8', '9',
                            '8', '9', '1',
                            '9', '1', '2'])
-        self.assertEquals(self.layer.get_block(37),
+        self.assertEquals(self.layer.get_region('block', 37),
                           ['4', '5', '6',
                            '5', '6', '7',
                            '6', '7', '8'])
-        self.assertEquals(self.layer.get_block(48),
+        self.assertEquals(self.layer.get_region('block', 48),
                           ['7', '8', '9',
                            '8', '9', '1',
                            '9', '1', '2'])
-        self.assertEquals(self.layer.get_block(73),
+        self.assertEquals(self.layer.get_region('block', 73),
                           ['7', '8', '9',
                            '8', '9', '1',
                            '9', '1', '2'])
-        self.assertEquals(self.layer.get_block(78),
+        self.assertEquals(self.layer.get_region('block', 78),
                           ['4', '5', '6',
                            '5', '6', '7',
                            '6', '7', '8'])

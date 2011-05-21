@@ -5,6 +5,7 @@ from sudokulib.constants import BLOCK_WIDTH
 
 class Layer(object):
     """Class layer for abstracting and manipulating Grid"""
+    allowed_regions = ('row', 'col', 'block')
 
     def __init__(self, data_str, solution_str, mystery_char='X'):
         self.mystery_char = mystery_char
@@ -31,16 +32,20 @@ class Layer(object):
                 block_offset += GRID_WIDTH
             self.block_table.append(list(block))
 
-    def get_row(self, index):
-        return self.row_table[index / GRID_WIDTH]
+    def get_region_index(self, region, index):
+        if not region in self.allowed_regions:
+            raise ValueError('Invalid region name')
+        if region == 'row':
+            return index / GRID_WIDTH
+        elif region == 'col':
+            return index % GRID_WIDTH
+        return ((index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH) + \
+                ((index % (BLOCK_WIDTH * GRID_WIDTH) / BLOCK_WIDTH) %
+                 BLOCK_WIDTH))
 
-    def get_col(self, index):
-        return self.col_table[index % GRID_WIDTH]
-
-    def get_block(self, index):
-        x = ((index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH) + \
-            ((index % (BLOCK_WIDTH * GRID_WIDTH) / BLOCK_WIDTH) % BLOCK_WIDTH))
-        return self.block_table[x]
+    def get_region(self, region, index):
+        index = self.get_region_index(region, index)
+        return getattr(self, '%s_table' % region)[index]
 
     def __str__(self):
         return self.str
