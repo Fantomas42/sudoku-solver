@@ -42,9 +42,9 @@ class NakedSingletonSolver(BaseSolver):
         if len(all_set) == 9 and self.layer.mystery_char in all_set:
             return (self.exclude_set - all_set).pop()
 
+
 class HiddenSingletonSolver(BaseSolver):
     """Naked Singleton Solver"""
 
     def solve(self):
         pass
-    

@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from sudokulib.layer import Layer
 from sudokulib.solvers import SingletonSolver
+from sudokulib.solvers import NakedSingletonSolver
 
 
 SOLUTION = '                                         ' \
@@ -33,3 +34,14 @@ class SingletonSolverTestCase(TestCase):
         layer = Layer(data, SOLUTION)
         solver = SingletonSolver(layer, 3)
         self.assertEquals(solver.solve(), '4')
+
+
+class NakedSingletonSolverTestCase(TestCase):
+    """Tests for NakedSingletonSolver"""
+
+    def test_solve(self):
+        data = '1X96X4X2X53X2XXXXXXX8XXX1X5XXXXX6X5XXXXX4' \
+               'XXXXX6X3XXXXX2X1XXX7XXXXXXX5X13X8X7X95X2'
+        layer = Layer(data, SOLUTION)
+        solver = NakedSingletonSolver(layer, 21)
+        self.assertEquals(solver.solve(), '9')
