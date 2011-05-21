@@ -166,6 +166,10 @@ class AdvancedLayerTestCase(TestCase):
         self.assertEquals(layer.get_region_missing_indexes('col', 15), [33])
         self.assertEquals(layer.get_region_missing_indexes('block', 35), [33])
 
+        self.assertEquals(layer.get_region_missing_indexes('row', 7), [])
+        self.assertEquals(layer.get_region_missing_indexes('col', 7), [])
+        self.assertEquals(layer.get_region_missing_indexes('block', 1), [])
+
     def test_get_excluded(self):
         layer = Layer(DATA_SET, ' ' * 81)
         self.assertEquals(layer.get_excluded(8),

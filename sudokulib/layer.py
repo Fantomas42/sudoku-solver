@@ -69,7 +69,7 @@ class Layer(object):
                      ((index % (BLOCK_WIDTH * GRID_WIDTH) % GRID_WIDTH) / BLOCK_WIDTH) * BLOCK_WIDTH
 
         for c in regions:
-            if c == self.mystery_char:
+            if c == self.mystery_char and offset != index:
                 missing_indexes.append(offset)
             if region in ('row', 'block'):
                 offset += 1
