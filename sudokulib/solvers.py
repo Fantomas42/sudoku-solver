@@ -3,6 +3,7 @@
 
 class BaseSolver(object):
     """BaseSolver class"""
+    name = 'base solver'
 
     def __init__(self, layer, index):
         self.layer = layer
@@ -14,6 +15,7 @@ class BaseSolver(object):
 
 class SingletonSolver(BaseSolver):
     """Simple Singleton Solver"""
+    name = 'Singleton'
 
     def solve(self):
         for region in self.layer.allowed_regions:
@@ -26,6 +28,7 @@ class SingletonSolver(BaseSolver):
 
 class NakedSingletonSolver(BaseSolver):
     """Naked Singleton Solver"""
+    name = 'Naked Singleton'
 
     def solve(self):
         excluded = self.layer.get_excluded(self.index)
@@ -37,7 +40,8 @@ class NakedSingletonSolver(BaseSolver):
 
 
 class HiddenSingletonSolver(BaseSolver):
-    """Naked Singleton Solver"""
+    """Hidden Singleton Solver"""
+    name = 'Hidden Singleton'
 
     def solve(self):
         for region in self.layer.allowed_regions:

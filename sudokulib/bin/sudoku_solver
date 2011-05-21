@@ -8,17 +8,27 @@ if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
     parser.add_option('-f', '--free', dest='free_char', type='string',
                       help='The character signaling free place', default='.')
+    parser.add_option(
+        '-v', '--verbosity', action='store', dest='verbosity',
+        default='1', type='choice', choices=['0', '1', '2'],
+        help='Verbosity level; 0=minimal output, 1=normal output, 2=all output')
+
     (options, args) = parser.parse_args()
 
     if not len(args):
         print 'No source file provided'
         sys.exit(1)
+
     source = args[0]
+    verbosity = int(options.verbosity)
 
     solver = SudokuSolver(source, options.free_char)
-    print '%s items missing' % solver.grid.missing
-    solver.run()
+
+    if verbosity == 1:
+        print '%s items missing' % solver.grid.missing
+
+    solver.run(verbosity)
 
     print solver
-    print '%s items missing' % solver.grid.missing
-
+    if verbosity:
+        print '%s items missing' % solver.grid.missing

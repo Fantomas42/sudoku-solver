@@ -17,24 +17,30 @@ class SudokuSolver(object):
         self.free_char = free_char
         self.grid = Grid(filename, self.free_char)
 
-    def run(self):
+    def run(self, verbosity):
         """Launch the loop of processing"""
         while not self.grid.completed:
-            #print self
-            #print '%s items missing' % self.grid.missing
-            position, solution = self.process()
+            if verbosity == 2:
+                print self
+                print '%s items missing' % self.grid.missing
+
+            position, solution = self.process(verbosity)
+
             if solution:
                 self.grid.apply_solution(position, solution)
             else:
                 break
 
-    def process(self):
+    def process(self, verbosity):
         """Process the missing elements into the solvers"""
         for i in range(len(self.grid)):
             if self.grid.data_solution[i] == self.grid.mystery_char:
                 for solver_class in self.solvers:
                     solution = solver_class(self.grid.layer, i).solve()
                     if solution:
+                        if verbosity == 2:
+                            print '%s has found %s at %s' % (
+                                solver_class.name, solution, i)
                         return i, solution
         return None, None
 
