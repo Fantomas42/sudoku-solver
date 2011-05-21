@@ -154,10 +154,18 @@ class LayerTestCase(TestCase):
         self.assertEquals(self.layer.get_region_index('block', 78), 8)
 
     def test_get_region_missing_indexes(self):
-        pass
+        layer = Layer(DATA_SET, ' ' * 81)
+        self.assertEquals(layer.get_region_missing_indexes('row', 1), [7])
+        self.assertEquals(layer.get_region_missing_indexes('col', 79), [7])
+        self.assertEquals(layer.get_region_missing_indexes('block', 16), [7])
 
     def test_get_excluded(self):
-        pass
+        layer = Layer(DATA_SET, ' ' * 81)
+        self.assertEquals(layer.get_excluded(8),
+                          set(['1', '2', '3', '4', '5',
+                               '6', '7', '8', '9', 'X']))
 
     def test_get_candidates(self):
-        pass
+        layer = Layer(DATA_SET, ' ' * 81)
+        self.assertEquals(layer.get_candidates(8),
+                          set())
