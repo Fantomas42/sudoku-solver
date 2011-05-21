@@ -4,6 +4,7 @@ from unittest import TestCase
 from sudokulib.layer import Layer
 from sudokulib.solvers import SingletonSolver
 from sudokulib.solvers import NakedSingletonSolver
+from sudokulib.solvers import HiddenSingletonSolver
 
 
 SOLUTION = '                                         ' \
@@ -45,3 +46,14 @@ class NakedSingletonSolverTestCase(TestCase):
         layer = Layer(data, SOLUTION)
         solver = NakedSingletonSolver(layer, 21)
         self.assertEquals(solver.solve(), '9')
+
+
+class HiddenSingletonSolverTestCase(TestCase):
+    """Tests for HiddenSingletonSolver"""
+
+    def test_solve(self):
+        data = '1XXXX4X7X24X5XXXXXXXXXX3XX8XXXXXX9XX851X7' \
+               'X432XX2XXXXXX3XX9XXXXXXXXXX5X93X6X8XXXX1'
+        layer = Layer(data, SOLUTION)
+        solver = HiddenSingletonSolver(layer, 25)
+        self.assertEquals(solver.solve(), '4')
