@@ -153,6 +153,9 @@ class LayerTestCase(TestCase):
         self.assertEquals(self.layer.get_region_index('col', 78), 6)
         self.assertEquals(self.layer.get_region_index('block', 78), 8)
 
+
+class AdvancedLayerTestCase(TestCase):
+
     def test_get_region_missing_indexes(self):
         layer = Layer(DATA_SET, ' ' * 81)
         self.assertEquals(layer.get_region_missing_indexes('row', 1), [7])
