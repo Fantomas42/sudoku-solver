@@ -10,7 +10,8 @@ setup(
     version='0.1',
     zip_safe=False,
 
-    scripts=['./sudokulib/bin/sudoku_solver'],
+    scripts=['./sudokulib/scripts/sudoku_solver',
+             './sudokulib/scripts/sudoku_indexes'],
 
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
