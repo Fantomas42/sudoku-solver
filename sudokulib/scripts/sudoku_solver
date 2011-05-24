@@ -3,7 +3,7 @@ import sys
 from time import time
 from optparse import OptionParser
 
-from sudokulib import SudokuSolver
+from sudokulib.solver import SudokuSolver
 
 if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
