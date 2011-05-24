@@ -42,3 +42,11 @@ Temps initial : 0.18
 Graph 	      : 6.13
 
 ERF
+
+5eme option :
+-------------
+
+Not using get_region_index
+
+Temps initial : 0.17
+GRaph 	      : 4.17

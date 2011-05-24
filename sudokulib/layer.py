@@ -27,13 +27,13 @@ class Layer(object):
     def get_region(self, region, index):
         """Return the elements of a region from a grid index"""
         return [self.table[i] for i in REGION_INDEXES[region][
-            self.get_region_index(region, index)]]
+            INDEX_REGIONS[index][region]]]
 
     def get_region_missing_indexes(self, region, index):
         """Return the missing elements's indexes
         of a region from a grid index"""
         return [i for i in
-                REGION_INDEXES[region][self.get_region_index(region, index)]
+                REGION_INDEXES[region][INDEX_REGIONS[index][region]]
                 if self.table[i] == self.mystery_char and i != index]
 
     def get_excluded(self, index):
