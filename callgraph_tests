@@ -1,0 +1,2 @@
+#!/bin/sh
+./bin/pycallgraph -i "*sudokulib*" -o tests.png ./bin/nosetests && eog tests.png

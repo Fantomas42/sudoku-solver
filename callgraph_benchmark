@@ -1,0 +1,2 @@
+#!/bin/sh
+./bin/pycallgraph -e "optparse*" -o benchmark.png ./bin/sudoku_solver datas/medium/03.grid && eog benchmark.png
