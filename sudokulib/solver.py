@@ -37,7 +37,7 @@ class SudokuSolver(object):
         for i in range(len(self.grid)):
             if self.grid.data_solution[i] == self.grid.mystery_char:
                 for solver_class in self.solvers:
-                    solution = solver_class(layer, i).solve()
+                    solution = solver_class().solve(layer, i)
                     if solution:
                         if verbosity == 2:
                             print '%s has found %s at %s' % (
