@@ -15,10 +15,30 @@ Temps initial : 0.18
 Graph 	      : 6.45
 
 
-2eme optin :
+2eme optim :
 ------------
 
 Simplification instanciation Solvers.
 
 Temps initial : 0.17
 Graph	      : 6.30
+
+
+3eme optim :
+------------
+
+Hard linking INDEX_REGION
+
+Temps initial : 0.15
+Graph 	      : 6.12
+
+
+4eme optim :
+------------
+
+All is hardlinked.
+
+Temps initial : 0.18
+Graph 	      : 6.13
+
+ERF

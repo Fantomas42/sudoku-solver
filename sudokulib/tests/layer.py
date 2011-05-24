@@ -31,42 +31,9 @@ class LayerTestCase(TestCase):
         self.layer = Layer(DATA_SET, SOLUTION)
 
     def test_str(self):
-        self.assertEquals(self.layer.str,
+        self.assertEquals(str(self.layer),
                           '12345678923456789134567891245678912356789' \
                           '1234678912345789123456891234567912345678')
-
-    def test_row_table(self):
-        self.assertEquals(self.layer.row_table[0], ['1', '2', '3',
-                                                    '4', '5', '6',
-                                                    '7', '8', '9'])
-        self.assertEquals(self.layer.row_table[1], ['2', '3', '4',
-                                                    '5', '6', '7',
-                                                    '8', '9', '1'])
-        self.assertEquals(self.layer.row_table[8], ['9', '1', '2',
-                                                    '3', '4', '5',
-                                                    '6', '7', '8'])
-
-    def test_col_table(self):
-        self.assertEquals(self.layer.col_table[0], ['1', '2', '3',
-                                                    '4', '5', '6',
-                                                    '7', '8', '9'])
-        self.assertEquals(self.layer.col_table[1], ['2', '3', '4',
-                                                    '5', '6', '7',
-                                                    '8', '9', '1'])
-        self.assertEquals(self.layer.row_table[8], ['9', '1', '2',
-                                                    '3', '4', '5',
-                                                    '6', '7', '8'])
-
-    def test_block_table(self):
-        self.assertEquals(self.layer.block_table[0], ['1', '2', '3',
-                                                      '2', '3', '4',
-                                                      '3', '4', '5'])
-        self.assertEquals(self.layer.block_table[4], ['7', '8', '9',
-                                                      '8', '9', '1',
-                                                      '9', '1', '2'])
-        self.assertEquals(self.layer.block_table[8], ['4', '5', '6',
-                                                      '5', '6', '7',
-                                                      '6', '7', '8'])
 
     def test_get_region_row(self):
         self.assertEquals(self.layer.get_region('row', 1),
@@ -131,7 +98,7 @@ class LayerTestCase(TestCase):
                            '6', '7', '8'])
 
     def test_get_region_index(self):
-        self.assertRaises(ValueError, self.layer.get_region_index,
+        self.assertRaises(KeyError, self.layer.get_region_index,
                           'toto', 12)
         self.assertEquals(self.layer.get_region_index('row', 0), 0)
         self.assertEquals(self.layer.get_region_index('col', 0), 0)

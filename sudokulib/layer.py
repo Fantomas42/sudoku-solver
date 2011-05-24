@@ -1,6 +1,6 @@
 """Layer for sudokulib"""
-from sudokulib.constants import GRID_WIDTH
-from sudokulib.constants import BLOCK_WIDTH
+from sudokulib.constants import INDEX_REGIONS
+from sudokulib.constants import REGION_INDEXES
 
 
 class Layer(object):
@@ -13,79 +13,35 @@ class Layer(object):
         self.all_candidates = set(all_candidates)
         self.all_chars = self.all_candidates | set(self.mystery_char)
 
-        self.str = ''
+        self.table = []
         for i in range(len(data_str)):
             if not solution_str[i] in (self.mystery_char, ' '):
-                self.str += solution_str[i]
+                self.table.append(solution_str[i])
             else:
-                self.str += data_str[i]
-
-        self.col_table = []
-        self.row_table = []
-        self.block_table = []
-        for i in range(GRID_WIDTH):
-            offset = i * GRID_WIDTH
-            self.col_table.append(list(self.str[i::GRID_WIDTH]))
-            self.row_table.append(list(self.str[offset:offset + GRID_WIDTH]))
-
-            block = ''
-            block_offset = ((i / BLOCK_WIDTH) * GRID_WIDTH * BLOCK_WIDTH) + \
-                           ((i % BLOCK_WIDTH) * BLOCK_WIDTH)
-            for j in range(BLOCK_WIDTH):
-                block += self.str[block_offset:block_offset + BLOCK_WIDTH]
-                block_offset += GRID_WIDTH
-            self.block_table.append(list(block))
+                self.table.append(data_str[i])
 
     def get_region_index(self, region, index):
         """Return the table index of a region from a grid index"""
-        if not region in self.allowed_regions:
-            raise ValueError('Invalid region name')
-        if region == 'row':
-            return index / GRID_WIDTH
-        elif region == 'col':
-            return index % GRID_WIDTH
-        return ((index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH) + \
-                ((index % (BLOCK_WIDTH * GRID_WIDTH) / BLOCK_WIDTH) %
-                 BLOCK_WIDTH))
+        return INDEX_REGIONS[index][region]
 
     def get_region(self, region, index):
         """Return the elements of a region from a grid index"""
-        index = self.get_region_index(region, index)
-        return getattr(self, '%s_table' % region)[index]
+        return [self.table[i] for i in REGION_INDEXES[region][
+            self.get_region_index(region, index)]]
 
     def get_region_missing_indexes(self, region, index):
         """Return the missing elements's indexes
         of a region from a grid index"""
-        offset = 0
-        missing_indexes = []
-        regions = self.get_region(region, index)
-
-        if region == 'row':
-            offset = self.get_region_index(region, index) * GRID_WIDTH
-        elif region == 'col':
-            offset = self.get_region_index(region, index)
-        elif region == 'block':
-            offset = (index / (BLOCK_WIDTH * GRID_WIDTH) * BLOCK_WIDTH * GRID_WIDTH) + \
-                     ((index % (BLOCK_WIDTH * GRID_WIDTH) % GRID_WIDTH) / BLOCK_WIDTH) * BLOCK_WIDTH
-
-        for c in regions:
-            if c == self.mystery_char and offset != index:
-                missing_indexes.append(offset)
-            if region in ('row', 'block'):
-                offset += 1
-                if region == 'block':
-                    if not offset % BLOCK_WIDTH:
-                        offset += BLOCK_WIDTH * 2
-            elif region == 'col':
-                offset += GRID_WIDTH
-
-        return missing_indexes
+        return [i for i in
+                REGION_INDEXES[region][self.get_region_index(region, index)]
+                if self.table[i] == self.mystery_char and i != index]
 
     def get_excluded(self, index):
         """Return a set of solution for an index"""
         all_regions_set = set()
         for region in self.allowed_regions:
             all_regions_set |= set(self.get_region(region, index))
+
         return all_regions_set
 
     def get_candidates(self, index):
@@ -93,4 +49,4 @@ class Layer(object):
         return self.all_chars - self.get_excluded(index)
 
     def __str__(self):
-        return self.str
+        return ''.join(self.table)
