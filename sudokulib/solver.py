@@ -33,10 +33,11 @@ class SudokuSolver(object):
 
     def process(self, verbosity):
         """Process the missing elements into the solvers"""
+        layer = self.grid.layer
         for i in range(len(self.grid)):
             if self.grid.data_solution[i] == self.grid.mystery_char:
                 for solver_class in self.solvers:
-                    solution = solver_class(self.grid.layer, i).solve()
+                    solution = solver_class(layer, i).solve()
                     if solution:
                         if verbosity == 2:
                             print '%s has found %s at %s' % (
