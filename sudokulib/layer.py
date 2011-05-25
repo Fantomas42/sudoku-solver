@@ -38,10 +38,10 @@ class Layer(object):
         # Assignate candidates and excluded
         for i in range(GRID_TOTAL):
             if self.table[i] == self.mystery_char:
-                index_region = INDEX_REGIONS[i]
-                excluded = set(self.region_table['row'][index_region['row']]) | \
-                           set(self.region_table['col'][index_region['col']]) | \
-                           set(self.region_table['block'][index_region['block']])
+                ir = INDEX_REGIONS[i]
+                excluded = set(self.region_table['row'][ir['row']]) | \
+                           set(self.region_table['col'][ir['col']]) | \
+                           set(self.region_table['block'][ir['block']])
                 self._excluded[i] = excluded
                 self._candidates[i] = self.all_chars - excluded
             else:
