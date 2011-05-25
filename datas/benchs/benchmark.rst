@@ -43,10 +43,19 @@ Graph 	      : 6.13
 
 ERF
 
-5eme option :
--------------
+5eme optim :
+------------
 
 Not using get_region_index
 
 Temps initial : 0.17
-GRaph 	      : 4.17
+Graph 	      : 4.17
+
+6eme optim :
+------------
+
+Precalculing all datas
+
+Temps initial : 0.049
+Graph 	      : 1.25
+

@@ -139,11 +139,13 @@ class AdvancedLayerTestCase(TestCase):
 
     def test_get_excluded(self):
         layer = Layer(DATA_SET, ' ' * 81)
-        self.assertEquals(layer.get_excluded(8),
+        self.assertEquals(layer.get_excluded(7),
                           set(['1', '2', '3', '4', '5',
                                '6', '7', '8', '9', 'X']))
 
     def test_get_candidates(self):
         layer = Layer(DATA_SET, ' ' * 81)
+        self.assertEquals(layer.get_candidates(7),
+                          set())
         self.assertEquals(layer.get_candidates(8),
                           set())
