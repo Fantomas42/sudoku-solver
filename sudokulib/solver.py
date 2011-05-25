@@ -1,6 +1,5 @@
 """Solver for sudokulib"""
 from sudokulib.grid import Grid
-from sudokulib.solvers import SingletonSolver
 from sudokulib.solvers import NakedSingletonSolver
 from sudokulib.solvers import HiddenSingletonSolver
 
@@ -9,8 +8,7 @@ class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
-                 solvers=[SingletonSolver,
-                          NakedSingletonSolver,
+                 solvers=[NakedSingletonSolver,
                           HiddenSingletonSolver,
                           ]):
         self.solvers = solvers

@@ -10,7 +10,7 @@ class BaseSolver(object):
 
 
 class SingletonSolver(BaseSolver):
-    """Simple Singleton Solver"""
+    """Simple Singleton Solver (deprecated)"""
     name = 'Singleton'
 
     def solve(self, layer, index):

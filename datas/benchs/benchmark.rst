@@ -67,3 +67,10 @@ Hard linking solvers
 Temps initial : 0.045
 Graph 	      : 0.67
 
+8eme optim :
+------------
+
+Disable SingletonSolver
+
+Temps initial : 0.039
+Graph 	      : 0.67
