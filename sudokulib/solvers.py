@@ -40,15 +40,15 @@ class HiddenSingletonSolver(BaseSolver):
     name = 'Hidden Singleton'
 
     def solve(self, layer, index):
+        candidates = layer.get_candidates(index)
+
         for region in layer.allowed_regions:
             region_possibilities = set()
             for index_missing in layer.get_region_missing_indexes(
                 region, index):
-                region_possibilities |= layer.get_candidates(
-                    index_missing)
+                region_possibilities |= layer.get_candidates(index_missing)
 
-            exclusion = layer.get_candidates(index) - \
-                        region_possibilities
+            exclusion = candidates - region_possibilities
             if len(exclusion) == 1:
                 return exclusion.pop()
 
