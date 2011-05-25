@@ -59,3 +59,11 @@ Precalculing all datas
 Temps initial : 0.049
 Graph 	      : 1.25
 
+7eme optim :
+------------
+
+Hard linking solvers
+
+Temps initial : 0.045
+Graph 	      : 0.67
+

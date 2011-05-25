@@ -14,9 +14,11 @@ class SingletonSolver(BaseSolver):
     name = 'Singleton'
 
     def solve(self, layer, index):
+        all_chars_length = len(layer.all_chars)
+
         for region in layer.allowed_regions:
             region_set = set(layer.get_region(region, index))
-            if len(layer.all_chars) - len(region_set) == 1:
+            if all_chars_length - len(region_set) == 1:
                 return (layer.all_chars - region_set).pop()
 
         return None
@@ -27,7 +29,7 @@ class NakedSingletonSolver(BaseSolver):
     name = 'Naked Singleton'
 
     def solve(self, layer, index):
-        excluded = layer.get_excluded(index)
+        excluded = layer._excluded[index]
 
         if len(layer.all_chars) - len(excluded) == 1:
             return (layer.all_chars - excluded).pop()
@@ -40,13 +42,13 @@ class HiddenSingletonSolver(BaseSolver):
     name = 'Hidden Singleton'
 
     def solve(self, layer, index):
-        candidates = layer.get_candidates(index)
+        candidates = layer._candidates[index]
 
         for region in layer.allowed_regions:
             region_possibilities = set()
             for index_missing in layer.get_region_missing_indexes(
                 region, index):
-                region_possibilities |= layer.get_candidates(index_missing)
+                region_possibilities |= layer._candidates[index_missing]
 
             exclusion = candidates - region_possibilities
             if len(exclusion) == 1:
