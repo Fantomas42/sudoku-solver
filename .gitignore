@@ -5,3 +5,5 @@ bin/
 include/
 lib/
 sudoku.egg-info/
+benchmark.png
+tests.png
