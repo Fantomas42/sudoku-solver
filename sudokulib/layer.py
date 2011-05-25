@@ -23,16 +23,14 @@ class Layer(object):
             else:
                 self.table.append(data_str[i])
 
-        self._row_table = []
-        self._col_table = []
-        self._block_table = []
+        self.region_table = {'col': [], 'row': [], 'block': []}
         # Assignate shortcut tables
         for i in range(GRID_WIDTH):
-            self._row_table.append([
+            self.region_table['row'].append([
                 self.table[j] for j in REGION_INDEXES['row'][i]])
-            self._col_table.append([
+            self.region_table['col'].append([
                 self.table[j] for j in REGION_INDEXES['col'][i]])
-            self._block_table.append([
+            self.region_table['block'].append([
                 self.table[j] for j in REGION_INDEXES['block'][i]])
 
         self._excluded = {}
@@ -40,9 +38,10 @@ class Layer(object):
         # Assignate candidates and excluded
         for i in range(GRID_TOTAL):
             if self.table[i] == self.mystery_char:
-                excluded = set(self._row_table[INDEX_REGIONS[i]['row']]) | \
-                           set(self._col_table[INDEX_REGIONS[i]['col']]) | \
-                           set(self._block_table[INDEX_REGIONS[i]['block']])
+                index_region = INDEX_REGIONS[i]
+                excluded = set(self.region_table['row'][index_region['row']]) | \
+                           set(self.region_table['col'][index_region['col']]) | \
+                           set(self.region_table['block'][index_region['block']])
                 self._excluded[i] = excluded
                 self._candidates[i] = self.all_chars - excluded
             else:
@@ -55,12 +54,11 @@ class Layer(object):
 
     def get_region(self, region, index):
         """Return the elements of a region from a grid index"""
-        return getattr(self, '_%s_table' % region)[
+        return self.region_table[region][
             INDEX_REGIONS[index][region]]
 
     def get_region_missing_indexes(self, region, index):
         """Return the missing elements's indexes"""
-        # TODO Refactor
         return [i for i in
                 REGION_INDEXES[region][INDEX_REGIONS[index][region]]
                 if self.table[i] == self.mystery_char and i != index]
