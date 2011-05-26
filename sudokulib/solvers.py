@@ -55,11 +55,3 @@ class HiddenSingletonSolver(BaseSolver):
                 return exclusion.pop()
 
         return None
-
-
-class LineBlockSolver(BaseSolver):
-    """Row/Col Block interaction Solver"""
-    name = 'Block Col/Row Interaction'
-
-    def solve(self, layer, index):
-        return None

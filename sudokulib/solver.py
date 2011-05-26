@@ -1,19 +1,20 @@
 """Solver for sudokulib"""
 from sudokulib.grid import Grid
-from sudokulib.solvers import LineBlockSolver
 from sudokulib.solvers import NakedSingletonSolver
 from sudokulib.solvers import HiddenSingletonSolver
+
+from sudokulib.preprocessors import LineBlockPreprocessor
 
 
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
+                 preprocessors=[LineBlockPreprocessor],
                  solvers=[NakedSingletonSolver,
-                          HiddenSingletonSolver,
-                          LineBlockSolver,
-                          ]):
+                          HiddenSingletonSolver]):
         self.solvers = solvers
+        self.preprocessors = preprocessors
         self.free_char = free_char
         self.grid = Grid(filename, self.free_char)
 
@@ -34,6 +35,19 @@ class SudokuSolver(object):
     def process(self, verbosity):
         """Process the missing elements into the solvers"""
         layer = self.grid.layer
+
+        i = 0
+        while i != len(self.preprocessors):
+            new_layer = self.preprocessors[i]().preprocess(layer)
+            if new_layer:
+                i = 0
+                layer = new_layer
+                if verbosity == 2:
+                    print '%s has optimized the layer' % \
+                          self.preprocessors[i].name
+            else:
+                i += 1
+
         for i in range(len(self.grid)):
             if self.grid.data_solution[i] == self.grid.mystery_char:
                 for solver_class in self.solvers:
