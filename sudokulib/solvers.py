@@ -25,7 +25,8 @@ class SingletonSolver(BaseSolver):
 
 
 class NakedSingletonSolver(BaseSolver):
-    """Naked Singleton Solver"""
+    """Naked Singleton Solver
+    alias: Sole Candidate"""
     name = 'Naked Singleton'
 
     def solve(self, layer, index):
@@ -38,7 +39,8 @@ class NakedSingletonSolver(BaseSolver):
 
 
 class HiddenSingletonSolver(BaseSolver):
-    """Hidden Singleton Solver"""
+    """Hidden Singleton Solver
+    alias: Unique Candidate"""
     name = 'Hidden Singleton'
 
     def solve(self, layer, index):
