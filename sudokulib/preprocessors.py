@@ -14,4 +14,4 @@ class LineBlockPreprocessor(BasePreprocessor):
     name = 'Block Col/Row Interaction'
 
     def preprocess(self, layer):
-        return layer
+        return None
