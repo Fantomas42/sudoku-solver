@@ -30,10 +30,9 @@ class NakedSingletonSolver(BaseSolver):
     name = 'Naked Singleton'
 
     def solve(self, layer, index):
-        excluded = layer._excluded[index]
-
-        if len(layer.all_chars) - len(excluded) == 1:
-            return (layer.all_chars - excluded).pop()
+        candidates = layer._candidates[index]
+        if len(candidates) == 1:
+            return candidates.pop()
 
         return None
 
