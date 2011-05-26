@@ -54,16 +54,3 @@ class HiddenSingletonSolverTestCase(TestCase):
                'X432XX2XXXXXX3XX9XXXXXXXXXX5X93X6X8XXXX1'
         layer = Layer(data, SOLUTION)
         self.assertEquals(solver.solve(layer, 25), '4')
-
-
-# class LineBlockSolverTestCase(TestCase):
-#     """Tests for LineBlockSolver"""
-
-#     def test_solve(self):
-#         solver = LineBlockSolver()
-
-#         data = '29X7X5X481XX6892738X7X249X5XXX2X1XXXXX24X' \
-#                '68XXXX98X342X9XX5X2XX44XXXX8X92321947586'
-
-#         layer = Layer(data, SOLUTION)
-#         self.assertEquals(solver.solve(layer, 45), '6')
