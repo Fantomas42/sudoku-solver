@@ -74,3 +74,11 @@ Disable SingletonSolver
 
 Temps initial : 0.039
 Graph 	      : 0.67
+
+9eme optim :
+------------
+
+Rewrite solvers with hard linking
+
+Temps initial : 0.032
+Graph 	      ; 0.037

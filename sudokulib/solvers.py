@@ -1,4 +1,6 @@
 """Solvers for sudokulib"""
+from sudokulib.constants import INDEX_REGIONS
+from sudokulib.constants import REGION_INDEXES
 
 
 class BaseSolver(object):
@@ -47,9 +49,10 @@ class HiddenSingletonSolver(BaseSolver):
 
         for region in layer.allowed_regions:
             region_possibilities = set()
-            for index_missing in layer.get_region_missing_indexes(
-                region, index):
-                region_possibilities |= layer._candidates[index_missing]
+            for neighbor_index in REGION_INDEXES[region][
+                INDEX_REGIONS[index][region]]:
+                if neighbor_index != index:
+                    region_possibilities |= layer._candidates[neighbor_index]
 
             exclusion = candidates - region_possibilities
             if len(exclusion) == 1:
