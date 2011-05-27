@@ -82,3 +82,11 @@ Rewrite solvers with hard linking
 
 Temps initial : 0.032
 Graph 	      ; 0.037
+
+Add Feature :
+-------------
+
+Col/Row Preprocessor
+
+Temps initial : 0.060
+Graph 	      : 0.76
