@@ -4,13 +4,15 @@ from sudokulib.solvers import NakedSingletonSolver
 from sudokulib.solvers import HiddenSingletonSolver
 
 from sudokulib.preprocessors import LineBlockPreprocessor
+from sudokulib.preprocessors import BlockBlockPreprocessor
 
 
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
-                 preprocessors=[LineBlockPreprocessor],
+                 preprocessors=[LineBlockPreprocessor,
+                                BlockBlockPreprocessor],
                  solvers=[NakedSingletonSolver,
                           HiddenSingletonSolver]):
         self.solvers = solvers
