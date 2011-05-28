@@ -147,5 +147,131 @@ class BlockBlockPreprocessor(BasePreprocessor):
     """Block/Block Interaction preprocessor"""
     name = 'Block Block Interaction'
 
+    def get_all_candidates(self, layer, indexes):
+        common_candidates = set()
+        for index in indexes:
+            candidates = layer._candidates[index]
+            if candidates:
+                common_candidates |= layer._candidates[index]
+
+        return common_candidates
+
     def preprocess(self, layer):
-        pass
+        for i in range(BLOCK_WIDTH):
+            line_index_1 = i * BLOCK_WIDTH
+            line_index_2 = line_index_1 + 1
+            line_index_3 = line_index_2 + 1
+
+            #print line_index_1, line_index_2, line_index_3
+
+            line_1_indexes = REGION_INDEXES['row'][line_index_1]
+            line_2_indexes = REGION_INDEXES['row'][line_index_2]
+            line_3_indexes = REGION_INDEXES['row'][line_index_3]
+
+            #print line_1_indexes
+            #print line_2_indexes
+            #print line_3_indexes
+
+            line_1_block_1 = self.get_all_candidates(layer, line_1_indexes[0:3])
+            line_1_block_2 = self.get_all_candidates(layer, line_1_indexes[3:6])
+            line_1_block_3 = self.get_all_candidates(layer, line_1_indexes[6:9])
+
+            line_2_block_1 = self.get_all_candidates(layer, line_2_indexes[0:3])
+            line_2_block_2 = self.get_all_candidates(layer, line_2_indexes[3:6])
+            line_2_block_3 = self.get_all_candidates(layer, line_2_indexes[6:9])
+
+            line_3_block_1 = self.get_all_candidates(layer, line_3_indexes[0:3])
+            line_3_block_2 = self.get_all_candidates(layer, line_3_indexes[3:6])
+            line_3_block_3 = self.get_all_candidates(layer, line_3_indexes[6:9])
+
+            #print line_1_block_1
+            #print line_1_block_2
+            #print line_1_block_3
+            #print line_2_block_1
+            #print line_2_block_2
+            #print line_2_block_3
+            #print line_3_block_1
+            #print line_3_block_2
+            #print line_3_block_3
+
+            line_1_common_candidates_by_block = line_1_block_1 & line_1_block_2 & line_1_block_3
+            line_2_common_candidates_by_block = line_2_block_1 & line_2_block_2 & line_2_block_3
+            line_3_common_candidates_by_block = line_3_block_1 & line_3_block_2 & line_3_block_3
+
+            #print 'COMONS 1 : ', line_1_common_candidates_by_block
+            #print 'COMONS 2 : ',line_2_common_candidates_by_block
+            #print 'COMONS 3 : ',line_3_common_candidates_by_block
+
+            combin_1 = line_1_common_candidates_by_block & line_2_common_candidates_by_block
+            combin_2 = line_2_common_candidates_by_block & line_3_common_candidates_by_block
+            combin_3 = line_1_common_candidates_by_block & line_3_common_candidates_by_block
+
+            #print 'COMBIN 1 (1, 2)', combin_1
+            #print 'COMBIN 2 (2, 3)', combin_2
+            #print 'COMBIN 3 (1, 3)', combin_3
+
+            if not combin_1 and not combin_2 and not combin_3:
+                # We can pass to the next iteration
+                continue
+
+            layer_has_changed = False
+            if combin_1:
+                #Elemination of commons_candidates in the appropriates cells
+                for candidate_to_remove in combin_1 - line_3_common_candidates_by_block:
+                    if candidate_to_remove in line_3_block_1:
+                        for index in line_1_indexes[0:3] + line_2_indexes[0:3]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_3_block_2:
+                        for index in line_1_indexes[3:6] + line_2_indexes[3:6]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_3_block_3:
+                        for index in line_1_indexes[6:9] + line_2_indexes[6:9]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+
+            if combin_2:
+                #Elemination of commons_candidates in the appropriates cells
+                for candidate_to_remove in combin_2 - line_1_common_candidates_by_block:
+                    if candidate_to_remove in line_1_block_1:
+                        for index in line_3_indexes[0:3] + line_2_indexes[0:3]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_1_block_2:
+                        for index in line_3_indexes[3:6] + line_2_indexes[3:6]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_1_block_3:
+                        for index in line_3_indexes[6:9] + line_2_indexes[6:9]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+
+            if combin_3:
+                #Elemination of commons_candidates in the appropriates cells
+                for candidate_to_remove in combin_3 - line_2_common_candidates_by_block:
+                    if candidate_to_remove in line_2_block_1:
+                        for index in line_3_indexes[0:3] + line_1_indexes[0:3]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_2_block_2:
+                        for index in line_3_indexes[3:6] + line_1_indexes[3:6]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+                    if candidate_to_remove in line_2_block_3:
+                        for index in line_3_indexes[6:9] + line_1_indexes[6:9]:
+                            layer_has_changed = True
+                            layer._candidates[index] = layer._candidates[index] - \
+                                                       set([candidate_to_remove])
+            if layer_has_changed:
+                return layer
+
+        return None
