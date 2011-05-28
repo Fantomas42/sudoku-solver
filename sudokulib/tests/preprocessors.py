@@ -11,7 +11,7 @@ SOLUTION = ' ' * 81
 class LineBlockPreprocessorTestCase(TestCase):
     """Tests for LineBlockPreprocessor"""
 
-    def test_preprocess(self):
+    def test_preprocess_horizontal(self):
         preprocessor = LineBlockPreprocessor()
 
         data = '29X7X5X481XX6892738X7X249X5XXX2X1XXXXX24X' \
@@ -36,6 +36,9 @@ class LineBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[34], set(['3', '5', '6']))
         self.assertEquals(layer._candidates[35], set(['7', '9']))
 
+    def test_preprocess_vertical(self):
+        preprocessor = LineBlockPreprocessor()
+
         data = '29X7X5X481XX6892738X7X249X5XXX2X1XXXXX24X' \
                '68XX6X98X342X9XX5X2XX44XXXX8X92321947586'
 
@@ -58,7 +61,7 @@ class LineBlockPreprocessorTestCase(TestCase):
 class BlockBlockPreprocessorTestCase(TestCase):
     """Tests for BlockBlockPreprocessor"""
 
-    def test_preprocess(self):
+    def test_preprocess_horizontal(self):
         preprocessor = BlockBlockPreprocessor()
 
         data = 'XX5X7X89XX198X2XX5487XXXXX2XX3XXX5X8954X8' \
@@ -83,10 +86,15 @@ class BlockBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[49], set(['3', '4', '5']))
         self.assertEquals(layer._candidates[50], set(['3', '4', '6', '7']))
 
+    def test_preprocess_vertical(self):
+        preprocessor = BlockBlockPreprocessor()
+
         data = '29X7X5X481XX6892738X7X249X5XXX2X1XXXXX24X' \
                '68XX6X98X342X9XX5X2XX44XXXX8X92321947586'
 
         layer = Layer(data, SOLUTION)
+        layer = LineBlockPreprocessor().preprocess(layer)
+        layer = LineBlockPreprocessor().preprocess(layer)
         self.assertEquals(layer._candidates[28], set(['3', '4', '5', '8']))
         self.assertEquals(layer._candidates[29], set(['3', '4', '5', '8']))
         self.assertEquals(layer._candidates[37], set(['1', '3', '5']))
