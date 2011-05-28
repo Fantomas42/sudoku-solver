@@ -281,7 +281,7 @@ class BlockBlockPreprocessor(BasePreprocessor):
             line_index_2 = line_index_1 + 1
             line_index_3 = line_index_2 + 1
 
-            print line_index_1, line_index_2, line_index_3
+            #print line_index_1, line_index_2, line_index_3
 
             line_1_indexes = REGION_INDEXES['col'][line_index_1]
             line_2_indexes = REGION_INDEXES['col'][line_index_2]
@@ -380,7 +380,7 @@ class BlockBlockPreprocessor(BasePreprocessor):
                             layer_has_changed = True
                             layer._candidates[index] = layer._candidates[index] - \
                                                        set([candidate_to_remove])
-                    if candidate_to_remove in line_2_block_2:                        
+                    if candidate_to_remove in line_2_block_2:
                         for index in line_3_indexes[3:6] + line_1_indexes[3:6]:
                             layer_has_changed = True
                             layer._candidates[index] = layer._candidates[index] - \
