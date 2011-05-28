@@ -72,7 +72,7 @@ class Grid(object):
             if i and not i % GRID_WIDTH:
                 string.append('\n')
             if i and not i % (GRID_WIDTH * 3):
-                string.append('%s\n' % ('-' * (GRID_WIDTH * 3 + 2)))
+                string.append('---------+---------+--------\n')
 
             if not i % 3 and i % GRID_WIDTH:
                 string.append('|')
