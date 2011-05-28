@@ -141,3 +141,11 @@ class LineBlockPreprocessor(BasePreprocessor):
                     return layer
 
         return None
+
+
+class BlockBlockPreprocessor(BasePreprocessor):
+    """Block/Block Interaction preprocessor"""
+    name = 'Block Block Interaction'
+
+    def preprocess(self, layer):
+        pass
