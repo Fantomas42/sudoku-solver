@@ -380,9 +380,7 @@ class BlockBlockPreprocessor(BasePreprocessor):
                             layer_has_changed = True
                             layer._candidates[index] = layer._candidates[index] - \
                                                        set([candidate_to_remove])
-                    if candidate_to_remove in line_2_block_2:
-                        import pdb; pdb.set_trace()
-                        
+                    if candidate_to_remove in line_2_block_2:                        
                         for index in line_3_indexes[3:6] + line_1_indexes[3:6]:
                             layer_has_changed = True
                             layer._candidates[index] = layer._candidates[index] - \
