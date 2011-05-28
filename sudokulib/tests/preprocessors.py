@@ -81,10 +81,10 @@ class BlockBlockPreprocessorTestCase(TestCase):
         layer = preprocessor.preprocess(layer)
         self.assertEquals(layer._candidates[30], set(['2', '6', '9']))
         self.assertEquals(layer._candidates[31], set(['4']))
-        self.assertEquals(layer._candidates[32], set(['4', '6', '9']))
+        self.assertEquals(layer._candidates[32], set(['4', '6', '7', '9']))
         self.assertEquals(layer._candidates[48], set(['2', '3', '5', '6']))
         self.assertEquals(layer._candidates[49], set(['3', '4', '5']))
-        self.assertEquals(layer._candidates[50], set(['3', '4', '6']))
+        self.assertEquals(layer._candidates[50], set(['3', '4', '6', '7']))
 
     def test_preprocess_vertical(self):
         preprocessor = BlockBlockPreprocessor()
