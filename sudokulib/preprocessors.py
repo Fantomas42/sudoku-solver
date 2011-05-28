@@ -18,11 +18,14 @@ class LineBlockPreprocessor(BasePreprocessor):
     name = 'Block Col/Row Interaction'
 
     def preprocess(self, layer):
-        # Detecter un jumeau ou triple dans les regions
-        #   => Un jumeau est 2 candidats qui se suivent sur une ligne
-        #      ou une colonne nul par ailleurs dans une region
-        # Si jumeau ou triple :
-        #   Supprimer les candidats de la ligne/colonne hors de la region
+        """
+        Detect a Twin in the regions vertically and horizontally:
+          => A Twin represent 2 candidates in a region and
+             in a col or a row, and nowhere else in the region.
+          If some Twins are detected:
+            Remove the Twins in the candidates of the col or row
+            outside the region.
+        """
 
         for i in range(GRID_WIDTH):
             # Start implement rows check
