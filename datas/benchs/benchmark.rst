@@ -99,3 +99,11 @@ Block/Block Preprocessor
 
 Temps initial : 0.070
 Graph 	      : 1.07
+
+10eme optim :
+-------------
+
+Multiple solutions in one time
+
+Temps initial : 0.025
+Graph 	      : 0.39
