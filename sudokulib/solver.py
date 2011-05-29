@@ -42,11 +42,11 @@ class SudokuSolver(object):
         while i != len(self.preprocessors):
             new_layer = self.preprocessors[i]().preprocess(layer)
             if new_layer:
-                i = 0
-                layer = new_layer
                 if verbosity == 2:
                     print '%s has optimized the layer' % \
                           self.preprocessors[i].name
+                i = 0
+                layer = new_layer
             else:
                 i += 1
 
