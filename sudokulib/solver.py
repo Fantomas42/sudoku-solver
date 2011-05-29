@@ -1,5 +1,6 @@
 """Solver for sudokulib"""
 from sudokulib.grid import Grid
+from sudokulib.constants import GRID_TOTAL
 from sudokulib.solvers import NakedSingletonSolver
 from sudokulib.solvers import HiddenSingletonSolver
 
@@ -27,15 +28,16 @@ class SudokuSolver(object):
                 print self
                 print '%s items missing' % self.grid.missing
 
-            position, solution = self.process(verbosity)
+            solutions = self.process(verbosity)
 
-            if solution:
-                self.grid.apply_solution(position, solution)
+            if solutions:
+                self.grid.apply_solutions(solutions)
             else:
                 break
 
     def process(self, verbosity):
         """Process the missing elements into the solvers"""
+        solutions = []
         layer = self.grid.layer
 
         i = 0
@@ -50,16 +52,18 @@ class SudokuSolver(object):
             else:
                 i += 1
 
-        for i in range(len(self.grid)):
-            if self.grid.data_solution[i] == self.grid.mystery_char:
-                for solver_class in self.solvers:
+        for solver_class in self.solvers:
+            for i in range(GRID_TOTAL):
+                if self.grid.data_solution[i] == self.grid.mystery_char:
                     solution = solver_class().solve(layer, i)
                     if solution:
+                        solutions.append((i, solution))
                         if verbosity == 2:
                             print '%s has found %s at %s' % (
                                 solver_class.name, solution, i)
-                        return i, solution
-        return None, None
+            if solutions:
+                return solutions
+        return solutions
 
     def __str__(self):
         return self.grid.__str__()

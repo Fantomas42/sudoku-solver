@@ -39,10 +39,11 @@ class Grid(object):
     def __len__(self):
         return len(self.data)
 
-    def apply_solution(self, index, solution):
+    def apply_solutions(self, solutions):
         """Apply a solution in the solution data"""
         solution_list = list(self.data_solution)
-        solution_list[index] = str(solution)
+        for index, solution in solutions:
+            solution_list[index] = str(solution)
         self.data_solution = ''.join(solution_list)
 
     def load_source(self):
