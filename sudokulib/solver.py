@@ -39,6 +39,10 @@ class SudokuSolver(object):
         """Process the missing elements into the solvers"""
         solutions = []
         layer = self.grid.layer
+        mystery_char = self.grid.mystery_char
+        data_solution = self.grid.data_solution
+        missing_indexes = [i for i in range(GRID_TOTAL)
+                           if data_solution[i] == mystery_char]
 
         i = 0
         while i != len(self.preprocessors):
@@ -53,14 +57,13 @@ class SudokuSolver(object):
                 i += 1
 
         for solver_class in self.solvers:
-            for i in range(GRID_TOTAL):
-                if self.grid.data_solution[i] == self.grid.mystery_char:
-                    solution = solver_class().solve(layer, i)
-                    if solution:
-                        solutions.append((i, solution))
-                        if verbosity == 2:
-                            print '%s has found %s at %s' % (
-                                solver_class.name, solution, i)
+            for i in missing_indexes:
+                solution = solver_class().solve(layer, i)
+                if solution:
+                    solutions.append((i, solution))
+                    if verbosity == 2:
+                        print '%s has found %s at %s' % (
+                            solver_class.name, solution, i)
             if solutions:
                 return solutions
         return solutions
