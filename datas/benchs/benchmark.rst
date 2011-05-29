@@ -90,3 +90,12 @@ Col/Row Preprocessor
 
 Temps initial : 0.060
 Graph 	      : 0.76
+
+
+Add Feature :
+-------------
+
+Block/Block Preprocessor
+
+Temps initial : 0.070
+Graph 	      : 1.07
