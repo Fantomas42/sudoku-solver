@@ -4,6 +4,7 @@ from unittest import TestCase
 from sudokulib.layer import Layer
 from sudokulib.preprocessors import LineBlockPreprocessor
 from sudokulib.preprocessors import BlockBlockPreprocessor
+from sudokulib.preprocessors import NakedSubsetPreprocessor
 
 SOLUTION = ' ' * 81
 
@@ -105,3 +106,27 @@ class BlockBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[29], set(['3', '4', '8']))
         self.assertEquals(layer._candidates[37], set(['1', '3']))
         self.assertEquals(layer._candidates[46], set(['1']))
+
+
+class NakedSubsetPreprocessorTestCase(TestCase):
+    """Tests for NakedSubsetPreprocessor"""
+
+    def test_preprocess(self):
+        preprocessor = NakedSubsetPreprocessor()
+
+        data = '3XXX2X81XX28X1X7X41X78XX2XX2X917X3XXX56XX' \
+               'X1X7731X8X4X2XXXX4192XX1X96X5XXXXXX5X6X1'
+
+        layer = Layer(data, SOLUTION)
+        self.assertEquals(layer._candidates[9], set(['5', '6', '9']))
+        self.assertEquals(layer._candidates[36], set(['4', '8']))
+        self.assertEquals(layer._candidates[54], set(['5', '6', '8']))
+        self.assertEquals(layer._candidates[63], set(['4', '8']))
+        self.assertEquals(layer._candidates[72], set(['4', '8', '9']))
+
+        layer = preprocessor.preprocess(layer)
+        self.assertEquals(layer._candidates[9], set(['5', '6', '9']))
+        self.assertEquals(layer._candidates[36], set(['4', '8']))
+        self.assertEquals(layer._candidates[54], set(['5', '6']))
+        self.assertEquals(layer._candidates[63], set(['4', '8']))
+        self.assertEquals(layer._candidates[72], set(['9']))
