@@ -49,7 +49,9 @@ class Grid(object):
     def load_source(self):
         """Load the data from a source"""
         source = open(self.filename, 'r')
-        source_data = source.read()
+        source_data = source.readlines()
+        source_data = ''.join([line for line in source_data
+                               if not line.startswith('#')])
         source.close()
 
         data = ''
