@@ -6,6 +6,7 @@ from sudokulib.solvers import HiddenSingletonSolver
 
 from sudokulib.preprocessors import LineBlockPreprocessor
 from sudokulib.preprocessors import BlockBlockPreprocessor
+from sudokulib.preprocessors import NakedSubsetPreprocessor
 
 
 class SudokuSolver(object):
@@ -13,7 +14,8 @@ class SudokuSolver(object):
 
     def __init__(self, filename, free_char='.',
                  preprocessors=[LineBlockPreprocessor,
-                                BlockBlockPreprocessor],
+                                BlockBlockPreprocessor,
+                                NakedSubsetPreprocessor],
                  solvers=[NakedSingletonSolver,
                           HiddenSingletonSolver]):
         self.solvers = solvers

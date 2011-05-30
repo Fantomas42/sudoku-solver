@@ -279,10 +279,11 @@ class NakedSubsetPreprocessor(BasePreprocessor):
                     if key_len > 1 and key_len == item_len:
                         for candidate_to_remove in list(key):
                             for index in indexes:
-                                if index not in item:
+                                if index not in item and \
+                                       candidate_to_remove in layer._candidates[index]:
                                     layer_has_change = True
-                                    layer._candidates[index] -= set(
-                                        candidate_to_remove)
+                                    layer._candidates[index] = layer._candidates[
+                                        index] - set(candidate_to_remove)
                 if layer_has_change:
                     return layer
         return None
