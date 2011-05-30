@@ -167,8 +167,7 @@ class DisjointChainPreprocessorTestCase(TestCase):
                '65916913524789X3XXX2XX876245913X42XXX7XX'
 
         layer = Layer(data, SOLUTION)
-        #layer = LineBlockPreprocessor().preprocess(layer)
-        #layer = LineBlockPreprocessor().preprocess(layer)
+        layer = LineBlockPreprocessor().preprocess(layer)
         self.assertEquals(layer._candidates[72], set(['1', '5']))
         self.assertEquals(layer._candidates[75], set(['6', '8']))
         self.assertEquals(layer._candidates[76], set(['1', '3', '6', '9']))
