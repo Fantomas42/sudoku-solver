@@ -38,20 +38,17 @@ class LineBlockPreprocessor(BasePreprocessor):
                 index_2_candidates = layer._candidates[index_2]
                 index_3_candidates = layer._candidates[index_3]
 
-                twins = False
+                twins_candidates = set()
                 if index_1_candidates & index_2_candidates:
-                    twins = (index_1, index_2)
-                    twins_candidates = index_1_candidates & index_2_candidates
-                elif index_2_candidates & index_3_candidates:
-                    twins = (index_2, index_3)
-                    twins_candidates = index_2_candidates & index_3_candidates
-                elif index_1_candidates & index_3_candidates:
-                    twins = (index_1, index_3)
-                    twins_candidates = index_1_candidates & index_3_candidates
+                    twins_candidates |= index_1_candidates & index_2_candidates
+                if index_2_candidates & index_3_candidates:
+                    twins_candidates |= index_2_candidates & index_3_candidates
+                if index_1_candidates & index_3_candidates:
+                    twins_candidates |= index_1_candidates & index_3_candidates
 
                 offset += BLOCK_WIDTH
 
-                if not twins:
+                if not twins_candidates:
                     continue
 
                 block_index = INDEX_REGIONS[index_1]['block']
@@ -95,20 +92,17 @@ class LineBlockPreprocessor(BasePreprocessor):
                 index_2_candidates = layer._candidates[index_2]
                 index_3_candidates = layer._candidates[index_3]
 
-                twins = False
+                twins_candidates = set()
                 if index_1_candidates & index_2_candidates:
-                    twins = (index_1, index_2)
-                    twins_candidates = index_1_candidates & index_2_candidates
-                elif index_2_candidates & index_3_candidates:
-                    twins = (index_2, index_3)
-                    twins_candidates = index_2_candidates & index_3_candidates
-                elif index_1_candidates & index_3_candidates:
-                    twins = (index_1, index_3)
-                    twins_candidates = index_1_candidates & index_3_candidates
+                    twins_candidates |= index_1_candidates & index_2_candidates
+                if index_2_candidates & index_3_candidates:
+                    twins_candidates |= index_2_candidates & index_3_candidates
+                if index_1_candidates & index_3_candidates:
+                    twins_candidates |= index_1_candidates & index_3_candidates
 
                 offset += BLOCK_WIDTH * GRID_WIDTH
 
-                if not twins:
+                if not twins_candidates:
                     continue
 
                 block_index = INDEX_REGIONS[index_1]['block']
