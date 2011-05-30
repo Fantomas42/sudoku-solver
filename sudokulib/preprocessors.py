@@ -281,3 +281,11 @@ class NakedSubsetPreprocessor(BasePreprocessor):
                 if layer_has_change:
                     return layer
         return None
+
+
+class DisjointChainPreprocessor(BasePreprocessor):
+    """DisjointChain preprocessor"""
+    name = 'Disjoint Chain'
+
+    def preprocess(self, layer):
+        return None
