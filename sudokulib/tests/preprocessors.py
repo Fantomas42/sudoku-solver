@@ -59,7 +59,7 @@ class LineBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[64], set(['5', '6', '7']))
 
     def test_preprocess_failing(self):
-        """http://www.mots-croises.ch/Sudoku/explication.cgi?g=A615359161566143141544-00af1&t=N5&Gr=300020800028000004107800000209100000056000007030080400000041920000960500000050601"
+        """http://www.mots-croises.ch/Sudoku/explication.cgi?g=A615359161566143141544-00af1&t=N5&Gr=300020800028000004107800000209100000056000007030080400000041920000960500000050601"""
         preprocessor = LineBlockPreprocessor()
 
         data = '3XXX3X81XX28X1X7X41X78XX2XX2X917X3XXX56XX' \
