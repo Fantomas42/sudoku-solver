@@ -58,6 +58,31 @@ class LineBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[55], set(['6', '7', '8']))
         self.assertEquals(layer._candidates[64], set(['5', '6', '7']))
 
+    def test_preprocess_failing(self):
+        """http://www.mots-croises.ch/Sudoku/explication.cgi?g=A615359161566143141544-00af1&t=N5&Gr=300020800028000004107800000209100000056000007030080400000041920000960500000050601"
+        preprocessor = LineBlockPreprocessor()
+
+        data = '3XXX3X81XX28X1X7X41X78XX2XX2X917X3XXX56XX' \
+               'X1X7731X8X4X2XXXX4192XX1X96X5XXXXXX5X6X1'
+
+        layer = Layer(data, SOLUTION)
+        self.assertEquals(layer._candidates[16], set(['3', '5', '6', '9']))
+        self.assertEquals(layer._candidates[25], set(['3', '5', '6', '9']))
+        self.assertEquals(layer._candidates[34], set(['5', '6', '8']))
+        self.assertEquals(layer._candidates[43], set(['8', '9']))
+        self.assertEquals(layer._candidates[52], set(['5', '6', '9']))
+        self.assertEquals(layer._candidates[70], set(['3', '4', '7', '8']))
+        self.assertEquals(layer._candidates[79], set(['3', '4', '7', '8']))
+
+        layer = preprocessor.preprocess(layer)
+        self.assertEquals(layer._candidates[16], set(['3', '5', '6']))
+        self.assertEquals(layer._candidates[25], set(['3', '5', '6']))
+        self.assertEquals(layer._candidates[34], set(['5', '6', '8']))
+        self.assertEquals(layer._candidates[43], set(['8', '9']))
+        self.assertEquals(layer._candidates[52], set(['5', '6', '9']))
+        self.assertEquals(layer._candidates[70], set(['3', '4', '7', '8']))
+        self.assertEquals(layer._candidates[79], set(['3', '4', '7', '8']))
+
 
 class BlockBlockPreprocessorTestCase(TestCase):
     """Tests for BlockBlockPreprocessor"""
