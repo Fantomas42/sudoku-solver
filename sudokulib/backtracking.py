@@ -2,9 +2,9 @@
 from sudokulib.solvers import BaseSolver
 
 
-class BacktrackSolver(BaseSolver):
+class BacktrackingSolver(BaseSolver):
     """Backtrack solver"""
     name = 'Backtracking'
 
-    def solver(self, laver, index):
-        pass
+    def solve(self, layer):
+        return ()

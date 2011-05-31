@@ -9,11 +9,13 @@ if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
     parser.add_option('-f', '--free', dest='free_char', type='string',
                       help='The character signaling free place', default='.')
-    parser.add_option(
-        '-v', '--verbosity', action='store', dest='verbosity',
-        default='1', type='choice', choices=['0', '1', '2'],
-        help='Verbosity level; 0=minimal output, ' \
-        '1=normal output, 2=all output')
+    parser.add_option('--nobacktracking', action='store_false',
+                      dest='backtracking', default=True,
+                      help='Do not use backtracking for finding solution')
+    parser.add_option('-v', '--verbosity', action='store', dest='verbosity',
+                      default='1', type='choice', choices=['0', '1', '2'],
+                      help='Verbosity level; 0=minimal output, ' \
+                      '1=normal output, 2=all output')
 
     (options, args) = parser.parse_args()
 
@@ -25,12 +27,14 @@ if __name__ == '__main__':
     verbosity = int(options.verbosity)
 
     start_time = time()
-    solver = SudokuSolver(source, options.free_char)
+    solver = SudokuSolver(source, verbosity=verbosity,
+                          free_char=options.free_char,
+                          backtracking=options.backtracking)
 
     if verbosity == 1:
         print '%s items missing' % solver.grid.missing
 
-    solver.run(verbosity)
+    solver.run()
 
     print solver
     if verbosity:
