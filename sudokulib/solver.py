@@ -76,7 +76,7 @@ class SudokuSolver(object):
         if self.backtracking:
             if self.verbosity == 2:
                 print 'Grid unsolvable using Backtracking'
-                return BacktrackingSolver().solve(layer)
+            return BacktrackingSolver().solve(layer)
 
         return solutions
 
