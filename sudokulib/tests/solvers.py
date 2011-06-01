@@ -2,9 +2,9 @@
 from unittest import TestCase
 
 from sudokulib.layer import Layer
-from sudokulib.solvers import SingletonSolver
-from sudokulib.solvers import NakedSingletonSolver
-from sudokulib.solvers import HiddenSingletonSolver
+from sudokulib.solvers.singleton import SingletonSolver
+from sudokulib.solvers.naked_singleton import NakedSingletonSolver
+from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
 
 
 SOLUTION = ' ' * 81

@@ -1,9 +1,9 @@
 """Solver for sudokulib"""
 from sudokulib.grid import Grid
 from sudokulib.constants import GRID_TOTAL
-from sudokulib.solvers import NakedSingletonSolver
-from sudokulib.solvers import HiddenSingletonSolver
 from sudokulib.backtracking import BacktrackingSolver
+from sudokulib.solvers.naked_singleton import NakedSingletonSolver
+from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
 
 from sudokulib.preprocessors import LineBlockPreprocessor
 from sudokulib.preprocessors import BlockBlockPreprocessor
