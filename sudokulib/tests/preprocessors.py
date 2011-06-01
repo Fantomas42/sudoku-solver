@@ -2,10 +2,10 @@
 from unittest import TestCase
 
 from sudokulib.layer import Layer
-from sudokulib.preprocessors import LineBlockPreprocessor
-from sudokulib.preprocessors import BlockBlockPreprocessor
-from sudokulib.preprocessors import NakedSubsetPreprocessor
-from sudokulib.preprocessors import DisjointChainPreprocessor
+from sudokulib.preprocessors.line_block import LineBlockPreprocessor
+from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
+from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
+from sudokulib.preprocessors.disjoint_chain import DisjointChainPreprocessor
 
 SOLUTION = ' ' * 81
 

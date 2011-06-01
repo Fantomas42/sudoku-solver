@@ -4,10 +4,9 @@ from sudokulib.constants import GRID_TOTAL
 from sudokulib.backtracking import BacktrackingSolver
 from sudokulib.solvers.naked_singleton import NakedSingletonSolver
 from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
-
-from sudokulib.preprocessors import LineBlockPreprocessor
-from sudokulib.preprocessors import BlockBlockPreprocessor
-from sudokulib.preprocessors import NakedSubsetPreprocessor
+from sudokulib.preprocessors.line_block import LineBlockPreprocessor
+from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
+from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 
 
 class SudokuSolver(object):
