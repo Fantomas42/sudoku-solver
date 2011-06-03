@@ -11,7 +11,7 @@ from sudokulib.tests.preprocessors import BasePreprocessorTestCase
 from sudokulib.tests.preprocessors import LineBlockPreprocessorTestCase
 from sudokulib.tests.preprocessors import BlockBlockPreprocessorTestCase
 from sudokulib.tests.preprocessors import NakedSubsetPreprocessorTestCase
-#from sudokulib.tests.preprocessors import DisjointChainPreprocessorTestCase
+from sudokulib.tests.preprocessors import DisjointChainPreprocessorTestCase
 
 loader = unittest.TestLoader()
 
@@ -26,5 +26,5 @@ test_suite = unittest.TestSuite([
     loader.loadTestsFromTestCase(LineBlockPreprocessorTestCase),
     loader.loadTestsFromTestCase(BlockBlockPreprocessorTestCase),
     loader.loadTestsFromTestCase(NakedSubsetPreprocessorTestCase),
-    #loader.loadTestsFromTestCase(DisjointChainPreprocessorTestCase),
+    loader.loadTestsFromTestCase(DisjointChainPreprocessorTestCase),
     ])
