@@ -116,4 +116,3 @@ class BlockBlockPreprocessor(BasePreprocessor):
                                 layer._candidates[index] = layer._candidates[index] - \
                                                            set([candidate])
                             return layer
-        return None

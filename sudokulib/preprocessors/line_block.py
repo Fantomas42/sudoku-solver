@@ -126,5 +126,3 @@ class LineBlockPreprocessor(BasePreprocessor):
 
                 if layer_has_changed:
                     return layer
-
-        return None

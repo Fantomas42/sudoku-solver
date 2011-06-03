@@ -31,4 +31,3 @@ class NakedSubsetPreprocessor(BasePreprocessor):
                                     index] - key_set
                 if layer_has_change:
                     return layer
-        return None
