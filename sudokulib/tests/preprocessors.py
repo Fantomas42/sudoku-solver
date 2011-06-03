@@ -2,12 +2,23 @@
 from unittest import TestCase
 
 from sudokulib.layer import Layer
+from sudokulib.preprocessors import BasePreprocessor
 from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
 from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 from sudokulib.preprocessors.disjoint_chain import DisjointChainPreprocessor
 
 SOLUTION = ' ' * 81
+
+
+class BasePreprocessorTestCase(TestCase):
+    """Tests for BasePreprocessor"""
+
+    def test_preprocess(self):
+        preprocessor = BasePreprocessor()
+
+        layer = Layer(SOLUTION, SOLUTION)
+        self.assertRaises(NotImplementedError, preprocessor.preprocess, layer)
 
 
 class LineBlockPreprocessorTestCase(TestCase):

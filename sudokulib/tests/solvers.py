@@ -2,12 +2,23 @@
 from unittest import TestCase
 
 from sudokulib.layer import Layer
+from sudokulib.solvers import BaseSolver
 from sudokulib.solvers.singleton import SingletonSolver
 from sudokulib.solvers.naked_singleton import NakedSingletonSolver
 from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
 
 
 SOLUTION = ' ' * 81
+
+
+class BaseSolverTestCase(TestCase):
+    """Tests for BaseSolver"""
+
+    def test_solver(self):
+        solver = BaseSolver()
+
+        layer = Layer(SOLUTION, SOLUTION)
+        self.assertRaises(NotImplementedError, solver.solve, layer, 0)
 
 
 class SingletonSolverTestCase(TestCase):
