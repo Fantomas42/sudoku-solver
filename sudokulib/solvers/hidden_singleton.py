@@ -23,5 +23,3 @@ class HiddenSingletonSolver(BaseSolver):
             exclusion = candidates - region_possibilities
             if len(exclusion) == 1:
                 return exclusion.pop()
-
-        return None

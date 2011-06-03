@@ -11,5 +11,3 @@ class NakedSingletonSolver(BaseSolver):
         candidates = layer._candidates[index]
         if len(candidates) == 1:
             return candidates.pop()
-
-        return None

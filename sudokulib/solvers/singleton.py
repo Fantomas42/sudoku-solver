@@ -13,5 +13,3 @@ class SingletonSolver(BaseSolver):
             region_set = set(layer.get_region(region, index))
             if all_chars_length - len(region_set) == 1:
                 return (layer.all_chars - region_set).pop()
-
-        return None
