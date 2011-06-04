@@ -7,6 +7,7 @@ from sudokulib.tests.solvers import BaseSolverTestCase
 from sudokulib.tests.solvers import SingletonSolverTestCase
 from sudokulib.tests.solvers import NakedSingletonSolverTestCase
 from sudokulib.tests.solvers import HiddenSingletonSolverTestCase
+from sudokulib.tests.backtracking import BacktrackingSolverTestCase
 from sudokulib.tests.preprocessors import BasePreprocessorTestCase
 from sudokulib.tests.preprocessors import LineBlockPreprocessorTestCase
 from sudokulib.tests.preprocessors import BlockBlockPreprocessorTestCase
@@ -22,6 +23,7 @@ test_suite = unittest.TestSuite([
     loader.loadTestsFromTestCase(SingletonSolverTestCase),
     loader.loadTestsFromTestCase(NakedSingletonSolverTestCase),
     loader.loadTestsFromTestCase(HiddenSingletonSolverTestCase),
+    loader.loadTestsFromTestCase(BacktrackingSolverTestCase),
     loader.loadTestsFromTestCase(BasePreprocessorTestCase),
     loader.loadTestsFromTestCase(LineBlockPreprocessorTestCase),
     loader.loadTestsFromTestCase(BlockBlockPreprocessorTestCase),
