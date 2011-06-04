@@ -123,6 +123,36 @@ class BlockBlockPreprocessorTestCase(TestCase):
         self.assertEquals(layer._candidates[49], set(['3', '4', '5']))
         self.assertEquals(layer._candidates[50], set(['3', '4', '6', '7']))
 
+    def test_preprocess_horizontal_for_coverage(self):
+        preprocessor = BlockBlockPreprocessor()
+
+        data = '7X94X85X64XXXX69X7X6X79X4839X46XX87587XX4' \
+               'X692625987341396871254XXX264739247359168'
+
+        layer = Layer(data, SOLUTION)
+        layer = LineBlockPreprocessor().preprocess(layer)
+        self.assertEquals(layer._candidates[1], set(['1', '3']))
+        self.assertEquals(layer._candidates[10], set(['1', '3', '5', '8']))
+        self.assertEquals(layer._candidates[11], set(['1', '2', '3', '8']))
+
+        layer = preprocessor.preprocess(layer)
+        self.assertEquals(layer._candidates[1], set(['3']))
+        self.assertEquals(layer._candidates[10], set(['3', '5', '8']))
+        self.assertEquals(layer._candidates[11], set(['2', '3', '8']))
+
+        data = data[::-1]
+
+        layer = Layer(data, SOLUTION)
+        layer = LineBlockPreprocessor().preprocess(layer)
+        self.assertEquals(layer._candidates[79], set(['1', '3']))
+        self.assertEquals(layer._candidates[70], set(['1', '3', '5', '8']))
+        self.assertEquals(layer._candidates[69], set(['1', '2', '3', '8']))
+
+        layer = preprocessor.preprocess(layer)
+        self.assertEquals(layer._candidates[79], set(['3']))
+        self.assertEquals(layer._candidates[70], set(['3', '5', '8']))
+        self.assertEquals(layer._candidates[69], set(['2', '3', '8']))
+
     def test_preprocess_vertical(self):
         preprocessor = BlockBlockPreprocessor()
 

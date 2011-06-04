@@ -9,6 +9,7 @@ class BlockBlockPreprocessor(BasePreprocessor):
     name = 'Block Block Interaction'
 
     def get_all_candidates(self, layer, indexes):
+        """Retrieve all candidates for a list of indexes"""
         common_candidates = set()
         for index in indexes:
             candidates = layer._candidates[index]
@@ -16,6 +17,33 @@ class BlockBlockPreprocessor(BasePreprocessor):
                 common_candidates |= layer._candidates[index]
 
         return common_candidates
+
+    def clean(self, layer, candidate,
+              line_indexes_1, line_indexes_2,
+              start, end):
+        """Remove the candidate in the layer"""
+        for index in line_indexes_1[start:end] + line_indexes_2[start:end]:
+            layer._candidates[index] = layer._candidates[index] - \
+                                       set([candidate])
+        return layer
+
+    def eliminate(self, layer, combination,
+                  line_indexes_1, line_indexes_2,
+                  block_1, block_2, block_3):
+        """Clean the layer of matching combination"""
+        for candidate in combination:
+            if not candidate in block_1 | block_2:
+                return self.clean(layer, candidate,
+                                  line_indexes_1, line_indexes_2,
+                                  6, 9)
+            if not candidate in block_1 | block_3:
+                return self.clean(layer, candidate,
+                                  line_indexes_1, line_indexes_2,
+                                  3, 6)
+            if not candidate in block_2 | block_3:
+                return self.clean(layer, candidate,
+                                  line_indexes_1, line_indexes_2,
+                                  0, 3)
 
     def preprocess(self, layer):
         for region in ('row', 'col'):
@@ -62,57 +90,25 @@ class BlockBlockPreprocessor(BasePreprocessor):
                     continue
 
                 if combin_1:
-                    # Elemination of common candidates in the other cells
-                    for candidate in combin_1:
-                        if not candidate in line_3_bloc_1 | line_3_bloc_2:
-                            for index in line_1_indexes[6:9] + line_2_indexes[6:9]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_3_bloc_1 | line_3_bloc_3:
-                            for index in line_1_indexes[3:6] + line_2_indexes[3:6]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_3_bloc_2 | line_3_bloc_3:
-                            for index in line_1_indexes[0:3] + line_2_indexes[0:3]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
+                    new_layer = self.eliminate(
+                        layer, combin_1,
+                        line_1_indexes, line_2_indexes,
+                        line_3_bloc_1, line_3_bloc_2, line_3_bloc_3)
+                    if new_layer:
+                        return new_layer
+
                 if combin_2:
-                    # Elemination of common candidates in the other cells
-                    for candidate in combin_2:
-                        if not candidate in line_1_bloc_1 | line_1_bloc_2:
-                            for index in line_2_indexes[6:9] + line_3_indexes[6:9]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_1_bloc_1 | line_1_bloc_3:
-                            for index in line_2_indexes[3:6] + line_3_indexes[3:6]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_1_bloc_2 | line_1_bloc_3:
-                            for index in line_2_indexes[0:3] + line_3_indexes[0:3]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
+                    new_layer = self.eliminate(
+                        layer, combin_2,
+                        line_2_indexes, line_3_indexes,
+                        line_1_bloc_1, line_1_bloc_2, line_1_bloc_3)
+                    if new_layer:
+                        return new_layer
 
                 if combin_3:
-                    # Elemination of common candidates in the other cells
-                    for candidate in combin_3:
-                        if not candidate in line_2_bloc_1 | line_2_bloc_2:
-                            for index in line_1_indexes[6:9] + line_3_indexes[6:9]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_2_bloc_1 | line_2_bloc_3:
-                            for index in line_1_indexes[3:6] + line_3_indexes[3:6]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
-                        if not candidate in line_2_bloc_2 | line_2_bloc_3:
-                            for index in line_1_indexes[0:3] + line_3_indexes[0:3]:
-                                layer._candidates[index] = layer._candidates[index] - \
-                                                           set([candidate])
-                            return layer
+                    new_layer = self.eliminate(
+                        layer, combin_3,
+                        line_1_indexes, line_3_indexes,
+                        line_2_bloc_1, line_2_bloc_2, line_2_bloc_3)
+                    if new_layer:
+                        return new_layer
