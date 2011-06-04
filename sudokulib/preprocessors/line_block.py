@@ -44,17 +44,16 @@ class LineBlockPreprocessor(BasePreprocessor):
                 if not twins_candidates:
                     continue
 
-                block_index = INDEX_REGIONS[index_1]['block']
-                block_other_indexes = set(REGION_INDEXES['block'][block_index]) - \
-                                      set([index_1, index_2, index_3])
                 all_candidates = set()
-                for index in block_other_indexes:
+                block_index = INDEX_REGIONS[index_1]['block']
+                for index in set(REGION_INDEXES['block'][block_index]) - \
+                        set([index_1, index_2, index_3]):
                     all_candidates |= layer._candidates[index]
 
-                twin_candidates_valids = []
+                twin_candidates_valids = set()
                 for twin_candidate in twins_candidates:
                     if not twin_candidate in all_candidates:
-                        twin_candidates_valids.append(twin_candidate)
+                        twin_candidates_valids.add(twin_candidate)
 
                 if not twin_candidates_valids:
                     continue
@@ -64,11 +63,10 @@ class LineBlockPreprocessor(BasePreprocessor):
                                      set([index_1, index_2, index_3])
                 layer_has_changed = False
                 for index in line_other_indexes:
-                    for candidate_to_remove in twin_candidates_valids:
-                        if candidate_to_remove in layer._candidates[index]:
-                            layer_has_changed = True
-                            layer._candidates[index] = layer._candidates[index] - \
-                                                       set([candidate_to_remove])
+                    if twin_candidates_valids & layer._candidates[index]:
+                        layer_has_changed = True
+                        layer._candidates[index] = layer._candidates[index] - \
+                                                   twin_candidates_valids
 
                 if layer_has_changed:
                     return layer
@@ -98,17 +96,16 @@ class LineBlockPreprocessor(BasePreprocessor):
                 if not twins_candidates:
                     continue
 
-                block_index = INDEX_REGIONS[index_1]['block']
-                block_other_indexes = set(REGION_INDEXES['block'][block_index]) - \
-                                      set([index_1, index_2, index_3])
                 all_candidates = set()
-                for index in block_other_indexes:
+                block_index = INDEX_REGIONS[index_1]['block']
+                for index in set(REGION_INDEXES['block'][block_index]) - \
+                        set([index_1, index_2, index_3]):
                     all_candidates |= layer._candidates[index]
 
-                twin_candidates_valids = []
+                twin_candidates_valids = set()
                 for twin_candidate in twins_candidates:
                     if not twin_candidate in all_candidates:
-                        twin_candidates_valids.append(twin_candidate)
+                        twin_candidates_valids.add(twin_candidate)
 
                 if not twin_candidates_valids:
                     continue
@@ -118,11 +115,10 @@ class LineBlockPreprocessor(BasePreprocessor):
                                      set([index_1, index_2, index_3])
                 layer_has_changed = False
                 for index in line_other_indexes:
-                    for candidate_to_remove in twin_candidates_valids:
-                        if candidate_to_remove in layer._candidates[index]:
-                            layer_has_changed = True
-                            layer._candidates[index] = layer._candidates[index] - \
-                                                       set([candidate_to_remove])
+                    if twin_candidates_valids & layer._candidates[index]:
+                        layer_has_changed = True
+                        layer._candidates[index] = layer._candidates[index] - \
+                                                   twin_candidates_valids
 
                 if layer_has_changed:
                     return layer
