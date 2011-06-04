@@ -1,12 +1,11 @@
 """Backtracking for sudokulib"""
 from sudokulib.layer import Layer
-from sudokulib.solvers import BaseSolver
 from sudokulib.constants import GRID_TOTAL
 
 VOID_SOLUTION = ' ' * GRID_TOTAL
 
 
-class BacktrackingSolver(BaseSolver):
+class BacktrackingSolver(object):
     """Backtrack solver"""
     name = 'Backtracking'
 
