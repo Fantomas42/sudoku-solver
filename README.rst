@@ -2,7 +2,7 @@
 SUDOKU
 ======
 
-Library for solving Sudoku puzzles step by step, in an human maner.
+Library for solving Sudoku puzzles step by step, in an human manner.
 
 Several scripts are provided to solve directly some grids.
 
@@ -14,7 +14,7 @@ sudoku_solver
 
 Usage: sudoku_indexes [options] source
 
-Script for solving Sudoku puzzles in a human maner, applying
+Script for solving Sudoku puzzles in an human manner, applying
 some advanced strategies for solving grids.
 
 If a puzzle cannot be solved with the strategies bundled in the package,
