@@ -9,7 +9,23 @@ class BacktrackingSolver(object):
     """Backtrack solver"""
     name = 'Backtracking'
 
+    def __init__(self, preprocessors=[]):
+        self.preprocessors = preprocessors
+
+    def preprocess(self, layer):
+        i = 0
+        while i != len(self.preprocessors):
+            new_layer = self.preprocessors[i]().preprocess(layer)
+            if new_layer:
+                layer = new_layer
+                i = 0
+            else:
+                i += 1
+        return layer
+
     def solve(self, layer):
+        layer = self.preprocess(layer)
+        
         solutions = []
         missings_str = ''.join(layer.table)
         missings = missings_str.count(layer.mystery_char)
