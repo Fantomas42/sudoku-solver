@@ -25,7 +25,7 @@ class BacktrackingSolver(object):
 
     def solve(self, layer):
         layer = self.preprocess(layer)
-        
+
         solutions = []
         missings_str = ''.join(layer.table)
         missings = missings_str.count(layer.mystery_char)
