@@ -33,6 +33,14 @@ Usage: sudoku_backtrack [options] source
 
 Script for solving Sudoku puzzles with the backtracking method only.
 
+Use the ``--nopreprocessing`` option to disable the preprocessing methods
+applied to reduces the number of candidates.
+
+This option is useful on small grids where optimisations are not really
+needed, but disabling the processings methods on large grid will increase
+the resolution time.
+
+
 sudoku_indexes
 --------------
 
