@@ -4,5 +4,7 @@ OK - Pep8 cleanup
 OK - Tests Backtracking
 OK - Preprocessors on Backtracking
 - Optimizations
-- Publish on Github
+- Pypi Release
 - New preprocessors
+- Articles
+http://www2.research.att.com/~gsf/sudoku/sudoku.html#Conclusions
