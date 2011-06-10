@@ -12,7 +12,7 @@ from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
-    def __init__(self, filename, free_char='.',
+    def __init__(self, filename, free_char='.', grid_class=Grid,
                  verbosity=1, backtracking=True,
                  preprocessors=[LineBlockPreprocessor,
                                 BlockBlockPreprocessor,
@@ -24,7 +24,7 @@ class SudokuSolver(object):
         self.solvers = solvers
         self.preprocessors = preprocessors
         self.free_char = free_char
-        self.grid = Grid(filename, self.free_char)
+        self.grid = grid_class(filename, self.free_char)
 
     def run(self):
         """Launch the loop of processing"""
