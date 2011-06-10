@@ -9,7 +9,7 @@ from sudokulib.constants import GRID_TOTAL
 class Grid(object):
     """Grid of Sudoku"""
 
-    def __init__(self, filename, free_char, mystery_char='X'):
+    def __init__(self, filename, free_char='.', mystery_char='X'):
         self.filename = filename
         self.free_char = free_char
         self.mystery_char = mystery_char
