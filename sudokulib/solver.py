@@ -1,4 +1,6 @@
 """Solver for sudokulib"""
+import logging
+
 from sudokulib.grid import Grid
 from sudokulib.constants import GRID_TOTAL
 from sudokulib.backtracking import BacktrackingSolver
@@ -8,18 +10,19 @@ from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
 from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 
+logger = logging.getLogger(__name__)
+
 
 class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
-    def __init__(self, filename, free_char='.', grid_class=Grid,
-                 verbosity=1, backtracking=True,
+    def __init__(self, filename, free_char='.',
+                 grid_class=Grid, backtracking=True,
                  preprocessors=[LineBlockPreprocessor,
                                 BlockBlockPreprocessor,
                                 NakedSubsetPreprocessor],
                  solvers=[NakedSingletonSolver,
                           HiddenSingletonSolver]):
-        self.verbosity = verbosity
         self.backtracking = backtracking
         self.solvers = solvers
         self.preprocessors = preprocessors
@@ -29,9 +32,8 @@ class SudokuSolver(object):
     def run(self):
         """Launch the loop of processing"""
         while not self.grid.completed:
-            if self.verbosity == 2:
-                print self
-                print '%s items missing' % self.grid.missing
+            logger.info(self.__str__())
+            logger.info('%s items missing' % self.grid.missing)
 
             solutions = self.process()
 
@@ -53,9 +55,8 @@ class SudokuSolver(object):
         while i != len(self.preprocessors):
             new_layer = self.preprocessors[i]().preprocess(layer)
             if new_layer:
-                if self.verbosity == 2:
-                    print '%s has optimized the layer' % \
-                          self.preprocessors[i].name
+                logger.info('%s has optimized the layer' % \
+                            self.preprocessors[i].name)
                 i = 0
                 layer = new_layer
             else:
@@ -66,16 +67,14 @@ class SudokuSolver(object):
                 solution = solver_class().solve(layer, i)
                 if solution:
                     solutions.append((i, solution))
-                    if self.verbosity == 2:
-                        print '%s has found %s at %s' % (
-                            solver_class.name, solution, i)
+                    logger.info('%s has found %s at %s' % (
+                        solver_class.name, solution, i))
             if solutions:
                 return solutions
 
         if self.backtracking:
-            if self.verbosity == 2:
-                print 'Sorry, but I am actually too dumb to solve ' \
-                      'this grid, I will use a BackTracking method.'
+            logger.info('Sorry, but I am actually too dumb to solve ' \
+                        'this grid, I will use a BackTracking method.')
             return BacktrackingSolver(self.preprocessors).solve(layer)
 
         return solutions
