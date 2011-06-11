@@ -15,20 +15,17 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     if not len(args):
-        print 'No source file provided'
-        sys.exit(1)
+        sys.exit('No source file provided')
 
     source = args[0]
 
     start_time = time()
 
     if options.preprocessing:
-        solver = SudokuSolver(source, verbosity=0,
-                              free_char=options.free_char,
+        solver = SudokuSolver(source, free_char=options.free_char,
                               solvers=[], backtracking=True)
     else:
-        solver = SudokuSolver(source, verbosity=0,
-                              free_char=options.free_char,
+        solver = SudokuSolver(source, free_char=options.free_char,
                               solvers=[], preprocessors=[],
                               backtracking=True)
 

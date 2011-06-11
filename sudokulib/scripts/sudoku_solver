@@ -20,15 +20,13 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     if not len(args):
-        print 'No source file provided'
-        sys.exit(1)
+        sys.exit('No source file provided')
 
     source = args[0]
     verbosity = int(options.verbosity)
 
     start_time = time()
-    solver = SudokuSolver(source, verbosity=verbosity,
-                          free_char=options.free_char,
+    solver = SudokuSolver(source, free_char=options.free_char,
                           backtracking=options.backtracking)
 
     if verbosity == 1:
