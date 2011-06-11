@@ -1,4 +1,5 @@
 """Grid for sudokulib"""
+import sys
 import string
 
 from sudokulib.layer import Layer
@@ -63,8 +64,7 @@ class Grid(object):
                     data += c
 
         if len(data) != GRID_TOTAL:
-            print u'Invalid source file'
-            exit(1)
+            sys.exit(u'Invalid source file')
 
         return data
 
