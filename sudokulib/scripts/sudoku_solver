@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import logging
 from time import time
 from optparse import OptionParser
 
@@ -12,10 +13,8 @@ if __name__ == '__main__':
     parser.add_option('--nobacktracking', action='store_false',
                       dest='backtracking', default=True,
                       help='Do not use backtracking for finding solution')
-    parser.add_option('-v', '--verbosity', action='store', dest='verbosity',
-                      default='1', type='choice', choices=['0', '1', '2'],
-                      help='Verbosity level; 0=minimal output, ' \
-                      '1=normal output, 2=all output')
+    parser.add_option('-v', '--verbosity', action='count', dest='verbosity',
+                      help='Increase verbosity (specify multiple times for more)')
 
     (options, args) = parser.parse_args()
 
@@ -23,7 +22,7 @@ if __name__ == '__main__':
         sys.exit('No source file provided')
 
     source = args[0]
-    verbosity = int(options.verbosity)
+    verbosity = options.verbosity
 
     start_time = time()
     solver = SudokuSolver(source, free_char=options.free_char,
@@ -31,10 +30,19 @@ if __name__ == '__main__':
 
     if verbosity == 1:
         print '%s items missing' % solver.grid.missing
+    elif verbosity >= 2:
+        console = logging.StreamHandler(sys.stdout)
+        logger = logging.getLogger('sudokulib')
+        logger.addHandler(console)
+        if verbosity == 2:
+            logger.setLevel(logging.INFO)
+        else:
+            logger.setLevel(logging.DEBUG)
 
     solver.run()
 
+    if verbosity >= 2:
+        print '%s items missing' % solver.grid.missing
     print solver
     if verbosity:
-        print 'in %s seconds' % (time() - start_time)
-        print '%s items missing' % solver.grid.missing
+        print 'Solved in %s seconds' % (time() - start_time)

@@ -34,5 +34,4 @@ if __name__ == '__main__':
     solver.run()
 
     print solver
-    print 'in %s seconds' % (time() - start_time)
-    print '%s items missing' % solver.grid.missing
+    print 'Solved in %s seconds' % (time() - start_time)

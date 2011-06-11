@@ -32,8 +32,8 @@ class SudokuSolver(object):
     def run(self):
         """Launch the loop of processing"""
         while not self.grid.completed:
-            logger.info(self.__str__())
             logger.info('%s items missing' % self.grid.missing)
+            logger.info(self.__str__())
 
             solutions = self.process()
 
@@ -55,7 +55,7 @@ class SudokuSolver(object):
         while i != len(self.preprocessors):
             new_layer = self.preprocessors[i]().preprocess(layer)
             if new_layer:
-                logger.info('%s has optimized the layer' % \
+                logger.debug('%s has optimized the layer' % \
                             self.preprocessors[i].name)
                 i = 0
                 layer = new_layer
@@ -67,7 +67,7 @@ class SudokuSolver(object):
                 solution = solver_class().solve(layer, i)
                 if solution:
                     solutions.append((i, solution))
-                    logger.info('%s has found %s at %s' % (
+                    logger.debug('%s has found %s at %s' % (
                         solver_class.name, solution, i))
             if solutions:
                 return solutions
