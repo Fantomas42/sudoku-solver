@@ -22,7 +22,7 @@ the resolution of the puzzle is done by a backtracking method.
 
 Use the ``--nobacktracking`` option to disable the backtracking method.
 
-Increasing the verbosity level at 2 (``-v 2``) will display step by step
+Increasing the verbosity level at 3 (``-vvv``) will display step by step
 the solving process.
 
 
