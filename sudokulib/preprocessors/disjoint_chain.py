@@ -6,5 +6,5 @@ class DisjointChainPreprocessor(BasePreprocessor):
     """DisjointChain preprocessor"""
     name = 'Disjoint Chain'
 
-    def preprocess(self, layer):
+    def _preprocess(self, layer):
         return None

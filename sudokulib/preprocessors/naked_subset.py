@@ -8,7 +8,7 @@ class NakedSubsetPreprocessor(BasePreprocessor):
     """NakedSubset preprocessor"""
     name = 'Naked Subset'
 
-    def preprocess(self, layer):
+    def _preprocess(self, layer):
         layer_has_change = False
         for region in ('row', 'col', 'block'):
             for i in range(GRID_WIDTH):

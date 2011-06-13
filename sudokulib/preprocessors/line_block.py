@@ -10,7 +10,7 @@ class LineBlockPreprocessor(BasePreprocessor):
     """Row/Col Block Interaction preprocessor"""
     name = 'Block Col/Row Interaction'
 
-    def preprocess(self, layer):
+    def _preprocess(self, layer):
         """
         Detect a Twin in the regions vertically and horizontally:
           => A Twin represent 2 candidates in a region and

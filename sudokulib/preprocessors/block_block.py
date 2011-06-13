@@ -45,7 +45,7 @@ class BlockBlockPreprocessor(BasePreprocessor):
                               line_indexes_1, line_indexes_2,
                               0, 3)
 
-    def preprocess(self, layer):
+    def _preprocess(self, layer):
         for region in ('row', 'col'):
             for i in range(BLOCK_WIDTH):
                 line_index_1 = i * BLOCK_WIDTH

@@ -55,8 +55,6 @@ class SudokuSolver(object):
         while i != len(self.preprocessors):
             new_layer = self.preprocessors[i]().preprocess(layer)
             if new_layer:
-                logger.debug('%s has optimized the layer' % \
-                            self.preprocessors[i].name)
                 i = 0
                 layer = new_layer
             else:
