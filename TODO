@@ -3,11 +3,9 @@ OK - Tests coverage
 OK - Pep8 cleanup
 OK - Tests Backtracking
 OK - Preprocessors on Backtracking
-EC - Remove prints in lib
+OK - Remove prints in lib
 - Optimizations
 - Pypi Release
 - New preprocessors
 - Articles
-http://www2.research.att.com/~gsf/sudoku/sudoku.html#Conclusions
-
-http://www.kylev.com/2009/07/01/start-your-python-project-with-optparse-and-logging/
+  http://www2.research.att.com/~gsf/sudoku/sudoku.html#Conclusions

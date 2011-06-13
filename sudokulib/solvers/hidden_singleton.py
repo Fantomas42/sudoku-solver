@@ -10,7 +10,7 @@ class HiddenSingletonSolver(BaseSolver):
     alias: Unique Candidate"""
     name = 'Hidden Singleton'
 
-    def solve(self, layer, index):
+    def _solve(self, layer, index):
         candidates = layer._candidates[index]
 
         for region in layer.allowed_regions:

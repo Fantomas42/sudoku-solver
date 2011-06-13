@@ -62,13 +62,12 @@ class SudokuSolver(object):
             else:
                 i += 1
 
+        # TODO: Try to apply multiple solvers in one time
         for solver_class in self.solvers:
             for i in missing_indexes:
                 solution = solver_class().solve(layer, i)
                 if solution:
                     solutions.append((i, solution))
-                    logger.debug('%s has found %s at %s' % (
-                        solver_class.name, solution, i))
             if solutions:
                 return solutions
 

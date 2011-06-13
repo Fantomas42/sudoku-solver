@@ -6,7 +6,7 @@ class SingletonSolver(BaseSolver):
     """Simple Singleton Solver (deprecated)"""
     name = 'Singleton'
 
-    def solve(self, layer, index):
+    def _solve(self, layer, index):
         all_chars_length = len(layer.all_chars)
 
         for region in layer.allowed_regions:
