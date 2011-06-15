@@ -4,7 +4,9 @@ import logging
 from time import time
 from optparse import OptionParser
 
+from sudokulib.grid import InvalidGrid
 from sudokulib.solver import SudokuSolver
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
@@ -25,8 +27,12 @@ if __name__ == '__main__':
     verbosity = options.verbosity
 
     start_time = time()
-    solver = SudokuSolver(source, free_char=options.free_char,
-                          backtracking=options.backtracking)
+
+    try:
+        solver = SudokuSolver(source, free_char=options.free_char,
+                              backtracking=options.backtracking)
+    except InvalidGrid, e:
+        sys.exit(e)
 
     if verbosity == 1:
         print '%s items missing' % solver.grid.missing

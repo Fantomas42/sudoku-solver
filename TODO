@@ -4,7 +4,8 @@ OK - Pep8 cleanup
 OK - Tests Backtracking
 OK - Preprocessors on Backtracking
 OK - Remove prints in lib
-- Implement an InvalidLayer error
+OK - Implement an InvalidLayer error
+- Test SudokuSolver
 - Multiple solvers at 1 turn
 - Optimizations
 - Pypi Release

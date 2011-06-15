@@ -1,10 +1,14 @@
 """Grid for sudokulib"""
-import sys
 import string
 
 from sudokulib.layer import Layer
-from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import GRID_TOTAL
+from sudokulib.constants import GRID_WIDTH
+from sudokulib.constants import BLOCK_WIDTH
+
+
+class InvalidGrid(ValueError):
+    pass
 
 
 class Grid(object):
@@ -23,6 +27,18 @@ class Grid(object):
                 self.data_solution += self.mystery_char
             else:
                 self.data_solution += ' '
+
+    def validate(self):
+        if len(self.data) != GRID_TOTAL:
+            raise InvalidGrid(u'Invalid source file')
+
+        v = [(k, c) for y in range(GRID_WIDTH)
+             for x, c in enumerate(
+                 self.data[y * GRID_WIDTH:(y + 1) * GRID_WIDTH])
+             for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH)
+             if c != self.mystery_char]
+        if len(v) > len(set(v)):
+            raise InvalidGrid(u'Invalid puzzle')
 
     @property
     def missing(self):
@@ -62,10 +78,6 @@ class Grid(object):
                     data += self.mystery_char
                 else:
                     data += c
-
-        if len(data) != GRID_TOTAL:
-            sys.exit(u'Invalid source file')
-
         return data
 
     def __str__(self):

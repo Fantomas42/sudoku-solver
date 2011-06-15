@@ -28,6 +28,7 @@ class SudokuSolver(object):
         self.preprocessors = preprocessors
         self.free_char = free_char
         self.grid = grid_class(filename, self.free_char)
+        self.grid.validate()
 
     def run(self):
         """Launch the loop of processing"""

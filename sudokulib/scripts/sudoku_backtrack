@@ -3,7 +3,9 @@ import sys
 from time import time
 from optparse import OptionParser
 
+from sudokulib.grid import InvalidGrid
 from sudokulib.solver import SudokuSolver
+
 
 if __name__ == '__main__':
     parser = OptionParser(usage='usage: %prog [options] source')
@@ -21,13 +23,15 @@ if __name__ == '__main__':
 
     start_time = time()
 
-    if options.preprocessing:
-        solver = SudokuSolver(source, free_char=options.free_char,
-                              solvers=[], backtracking=True)
-    else:
-        solver = SudokuSolver(source, free_char=options.free_char,
-                              solvers=[], preprocessors=[],
-                              backtracking=True)
+    solver_kw = {'free_char': options.free_char,
+                 'solvers': [], 'backtracking': True}
+    if not options.preprocessing:
+        solver_kw['preprocessors'] = []
+
+    try:
+        solver = SudokuSolver(source, **solver_kw)
+    except InvalidGrid, e:
+        sys.exit(e)
 
     print '%s items missing' % solver.grid.missing
 
