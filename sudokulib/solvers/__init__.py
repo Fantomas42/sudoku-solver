@@ -14,7 +14,6 @@ class BaseSolver(object):
             logger.debug("%s has found solution '%s' at index %s" % (
                 self.name, solution, index))
             return solution
-        return None
 
     def _solve(self, layer, index):
         raise NotImplementedError
