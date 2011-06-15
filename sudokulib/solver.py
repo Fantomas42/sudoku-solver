@@ -1,7 +1,7 @@
 """Solver for sudokulib"""
 import logging
 
-from sudokulib.grid import Grid
+from sudokulib.grid import FileSystemGrid
 from sudokulib.constants import GRID_TOTAL
 from sudokulib.backtracking import BacktrackingSolver
 from sudokulib.solvers.naked_singleton import NakedSingletonSolver
@@ -17,7 +17,7 @@ class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
-                 grid_class=Grid, backtracking=True,
+                 grid_class=FileSystemGrid, backtracking=True,
                  preprocessors=[LineBlockPreprocessor,
                                 BlockBlockPreprocessor,
                                 NakedSubsetPreprocessor],

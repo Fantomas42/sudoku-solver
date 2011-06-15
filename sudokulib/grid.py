@@ -11,8 +11,8 @@ class InvalidGrid(ValueError):
     pass
 
 
-class Grid(object):
-    """Grid of Sudoku"""
+class BaseGrid(object):
+    """Base Grid of Sudoku"""
 
     def __init__(self, filename, free_char='.', mystery_char='X'):
         self.filename = filename
@@ -40,6 +40,9 @@ class Grid(object):
         if len(v) > len(set(v)):
             raise InvalidGrid(u'Invalid puzzle')
 
+    def load_source(self):
+        raise NotImplementedError
+
     @property
     def missing(self):
         return self.data_solution.count(self.mystery_char)
@@ -62,23 +65,6 @@ class Grid(object):
         for index, solution in solutions:
             solution_list[index] = str(solution)
         self.data_solution = ''.join(solution_list)
-
-    def load_source(self):
-        """Load the data from a source"""
-        source = open(self.filename, 'r')
-        source_data = source.readlines()
-        source_data = ''.join([line for line in source_data
-                               if not line.startswith('#')])
-        source.close()
-
-        data = ''
-        for c in source_data:
-            if c in string.digits + self.free_char:
-                if c in ('0', self.free_char):
-                    data += self.mystery_char
-                else:
-                    data += c
-        return data
 
     def __str__(self):
         string = []
@@ -103,3 +89,31 @@ class Grid(object):
             i += 1
 
         return ''.join(string)
+
+
+class FileSystemGrid(BaseGrid):
+    """Grid loaded from a file on the FileSystem"""
+
+    def load_source(self):
+        source = open(self.filename, 'r')
+        source_data = source.readlines()
+        source_data = ''.join([line for line in source_data
+                               if not line.startswith('#')])
+        source.close()
+
+        data = ''
+        for c in source_data:
+            if c in string.digits + self.free_char:
+                if c in ('0', self.free_char):
+                    data += self.mystery_char
+                else:
+                    data += c
+        return data
+
+
+class StringGrid(BaseGrid):
+    """Grid loaded from a String"""
+
+    def load_source(self):
+        return self.filename.translate(string.maketrans(
+            ('0', self.free_char), (self.mystery_char, self.mystery_char)))

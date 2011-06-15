@@ -5,7 +5,8 @@ OK - Tests Backtracking
 OK - Preprocessors on Backtracking
 OK - Remove prints in lib
 OK - Implement an InvalidLayer error
-- Test SudokuSolver
+EC - Test SudokuSolver
+EC - Several Grid Loader
 - Multiple solvers at 1 turn
 - Optimizations
 - Pypi Release
