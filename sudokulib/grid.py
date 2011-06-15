@@ -116,4 +116,4 @@ class StringGrid(BaseGrid):
 
     def load_source(self):
         return self.filename.translate(string.maketrans(
-            ('0', self.free_char), (self.mystery_char, self.mystery_char)))
+            '0%s' % self.free_char, self.mystery_char * 2))

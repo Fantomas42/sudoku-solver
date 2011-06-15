@@ -3,6 +3,7 @@ import unittest
 
 from sudokulib.tests.layer import LayerTestCase
 from sudokulib.tests.layer import AdvancedLayerTestCase
+from sudokulib.tests.solver import SudokuSolverTestCase
 from sudokulib.tests.solvers import BaseSolverTestCase
 from sudokulib.tests.solvers import SingletonSolverTestCase
 from sudokulib.tests.solvers import NakedSingletonSolverTestCase
@@ -31,4 +32,5 @@ test_suite = unittest.TestSuite([
     loader.loadTestsFromTestCase(BlockBlockPreprocessorTestCase),
     loader.loadTestsFromTestCase(NakedSubsetPreprocessorTestCase),
     loader.loadTestsFromTestCase(DisjointChainPreprocessorTestCase),
+    loader.loadTestsFromTestCase(SudokuSolverTestCase),
     ])
