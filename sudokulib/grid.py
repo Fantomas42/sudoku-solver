@@ -30,7 +30,10 @@ class BaseGrid(object):
 
     def validate(self):
         if len(self.data) != GRID_TOTAL:
-            raise InvalidGrid(u'Invalid source file')
+            raise InvalidGrid(u'The grid has an invalid size')
+
+        if GRID_TOTAL - self.missing < 17:
+            raise InvalidGrid(u'Not enough clues to solve the grid')
 
         v = [(k, c) for y in range(GRID_WIDTH)
              for x, c in enumerate(
@@ -38,7 +41,7 @@ class BaseGrid(object):
              for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH)
              if c != self.mystery_char]
         if len(v) > len(set(v)):
-            raise InvalidGrid(u'Invalid puzzle')
+            raise InvalidGrid(u'The grid is not a valid puzzle')
 
     def load_source(self):
         raise NotImplementedError
