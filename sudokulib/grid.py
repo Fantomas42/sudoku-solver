@@ -6,6 +6,10 @@ from sudokulib.constants import GRID_TOTAL
 from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import BLOCK_WIDTH
 
+INVALID_GRID_SIZE = u'The grid has an invalid size'
+INVALID_GRID_CLUES = u'Not enough clues to solve the grid'
+INVALID_GRID_PUZZLE = u'The grid is not a valid puzzle'
+
 
 class InvalidGrid(ValueError):
     pass
@@ -30,10 +34,10 @@ class BaseGrid(object):
 
     def validate(self):
         if len(self.data) != GRID_TOTAL:
-            raise InvalidGrid(u'The grid has an invalid size')
+            raise InvalidGrid(INVALID_GRID_SIZE)
 
         if GRID_TOTAL - self.missing < 17:
-            raise InvalidGrid(u'Not enough clues to solve the grid')
+            raise InvalidGrid(INVALID_GRID_CLUES)
 
         v = [(k, c) for y in range(GRID_WIDTH)
              for x, c in enumerate(
@@ -41,7 +45,7 @@ class BaseGrid(object):
              for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH)
              if c != self.mystery_char]
         if len(v) > len(set(v)):
-            raise InvalidGrid(u'The grid is not a valid puzzle')
+            raise InvalidGrid(INVALID_GRID_PUZZLE)
 
     def load_source(self):
         raise NotImplementedError
