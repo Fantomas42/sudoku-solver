@@ -6,9 +6,9 @@ from sudokulib.constants import GRID_TOTAL
 from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import BLOCK_WIDTH
 
-INVALID_GRID_SIZE = u'The grid has an invalid size'
-INVALID_GRID_CLUES = u'Not enough clues to solve the grid'
-INVALID_GRID_PUZZLE = u'The grid is not a valid puzzle'
+INVALID_GRID_SIZE = u'The grid has an invalid size.'
+INVALID_GRID_CLUES = u'Not enough clues to solve the grid.'
+INVALID_GRID_PUZZLE = u'The grid is not a valid puzzle.'
 
 
 class InvalidGrid(ValueError):
