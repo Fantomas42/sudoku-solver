@@ -33,7 +33,7 @@ class BaseGrid(object):
                 self.data_solution += ' '
 
     def validate(self):
-        if len(self.data) != GRID_TOTAL:
+        if len(self) != GRID_TOTAL:
             raise InvalidGrid(INVALID_GRID_SIZE)
 
         if GRID_TOTAL - self.missing < 17:
