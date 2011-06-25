@@ -1,0 +1,2 @@
+#!/bin/sh
+./bin/coverage run ./bin/nosetests && ./bin/coverage html && firefox htmlcov/index.html
