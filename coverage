@@ -1,2 +1,2 @@
 #!/bin/sh
-./bin/coverage run ./bin/nosetests && ./bin/coverage html && firefox htmlcov/index.html
+./bin/coverage run ./bin/nosetests && ./bin/coverage html --omit="sudokulib/tests/*" && firefox htmlcov/index.html

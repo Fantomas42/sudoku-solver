@@ -6,10 +6,12 @@ OK - Preprocessors on Backtracking
 OK - Remove prints in lib
 OK - Implement an InvalidLayer error
 EC - Test SudokuSolver
-EC - Several Grid Loader
+OK - Several Grid Loader
+- Global benchmark on hard grid
 - Multiple solvers at 1 turn
 - Optimizations
 - Pypi Release
 - New preprocessors
-- Articles
+OK - Web version
+EC - Article
   http://www2.research.att.com/~gsf/sudoku/sudoku.html#Conclusions
