@@ -38,11 +38,17 @@ class SingletonSolverTestCase(TestCase):
         layer = Layer(data, SOLUTION)
         self.assertEquals(solver.solve(layer, 3), '4')
 
-        # Blokc resolution
+        # Block resolution
         data = '123X56X89578139624496872153952381467641X9' \
-               '7835387564291719623548864915372235748916'
+               '7835387564291719623548864915372235X48916'
         layer = Layer(data, SOLUTION)
         self.assertEquals(solver.solve(layer, 3), '4')
+
+        # No resolution
+        data = '12345678957813962449687215395238146764129' \
+               '7835387564291719623548864915372235748916'
+        layer = Layer(data, SOLUTION)
+        self.assertEquals(solver.solve(layer, 7), 'X')
 
 
 class NakedSingletonSolverTestCase(TestCase):

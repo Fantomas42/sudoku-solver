@@ -9,6 +9,7 @@ OK - Test SudokuSolver
 OK - Several Grid Loader
 OK - Test Grids
 EC - Docstrings
+EC - Tests no resolutions
 - Global benchmark on hard grid
 - Multiple solvers at 1 turn
 - Optimizations
