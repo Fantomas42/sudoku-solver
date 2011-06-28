@@ -24,7 +24,7 @@ setup(
 
     license='GPL',
     platforms='any',
-    description='Sudoku solver.',
+    description='Library and scripts for solving Sudoku puzzles.',
     long_description=open(os.path.join('README.rst')).read(),
     keywords='sudoku, solver',
     classifiers=[
