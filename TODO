@@ -5,8 +5,10 @@ OK - Tests Backtracking
 OK - Preprocessors on Backtracking
 OK - Remove prints in lib
 OK - Implement an InvalidLayer error
-EC - Test SudokuSolver
+OK - Test SudokuSolver
 OK - Several Grid Loader
+OK - Test Grids
+EC - Docstrings
 - Global benchmark on hard grid
 - Multiple solvers at 1 turn
 - Optimizations

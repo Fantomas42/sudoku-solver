@@ -1,6 +1,9 @@
 """Tests for sudokulib"""
 import unittest
 
+from sudokulib.tests.grid import BaseGridTestCase
+from sudokulib.tests.grid import StringGridTestCase
+from sudokulib.tests.grid import FileSystemGridTestCase
 from sudokulib.tests.layer import LayerTestCase
 from sudokulib.tests.layer import AdvancedLayerTestCase
 from sudokulib.tests.solver import SudokuSolverTestCase
@@ -19,6 +22,9 @@ from sudokulib.tests.preprocessors import DisjointChainPreprocessorTestCase
 loader = unittest.TestLoader()
 
 test_suite = unittest.TestSuite([
+    loader.loadTestsFromTestCase(BaseGridTestCase),
+    loader.loadTestsFromTestCase(StringGridTestCase),
+    loader.loadTestsFromTestCase(FileSystemGridTestCase),
     loader.loadTestsFromTestCase(LayerTestCase),
     loader.loadTestsFromTestCase(AdvancedLayerTestCase),
     loader.loadTestsFromTestCase(BaseSolverTestCase),

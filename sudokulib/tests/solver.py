@@ -25,7 +25,6 @@ class SudokuSolverTestCase(TestCase):
         solver.run()
         self.assertEquals(solver.grid.completed, False)
 
-
     def test_use_backtracking(self):
         grid = '123456.8957813962449687215395238146764129' \
                '7835387564291719623548864915372235748916'
