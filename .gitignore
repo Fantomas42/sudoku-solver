@@ -4,7 +4,7 @@
 bin/
 include/
 lib/
-sudoku.egg-info/
+sudoku_solver.egg-info/
 benchmark.png
 tests.png
 .coverage
