@@ -9,6 +9,8 @@ class BaseSolver(object):
     name = 'base solver'
 
     def solve(self, layer, index):
+        """If a solution has been found, log it
+        and return it"""
         solution = self._solve(layer, index)
         if solution:
             logger.debug("%s has found solution '%s' at index %s" % (

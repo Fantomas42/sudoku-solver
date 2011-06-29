@@ -12,6 +12,8 @@ INVALID_GRID_PUZZLE = u'The grid is not a valid puzzle.'
 
 
 class InvalidGrid(ValueError):
+    """Exception raised when a Grid instance
+    is not valid"""
     pass
 
 

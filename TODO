@@ -8,13 +8,16 @@ OK - Implement an InvalidLayer error
 OK - Test SudokuSolver
 OK - Several Grid Loader
 OK - Test Grids
-EC - Docstrings
+OK - Docstrings
 EC - Tests no resolutions
 - Global benchmark on hard grid
+    http://norvig.com/sudoku.html
+    http://www2.warwick.ac.uk/fac/sci/moac/students/peter_cock/python/sudoku/
 - Multiple solvers at 1 turn
 - Optimizations
 - Pypi Release
 - New preprocessors
+    http://www.simes.clara.co.uk/programs/sudokutechnique3.htm
 OK - Web version
 EC - Article
   http://www2.research.att.com/~gsf/sudoku/sudoku.html#Conclusions

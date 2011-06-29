@@ -10,9 +10,12 @@ class BacktrackingSolver(object):
     name = 'Backtracking'
 
     def __init__(self, preprocessors=[]):
+        """Simply register the preprocessors
+        to use at the initialization"""
         self.preprocessors = preprocessors
 
     def preprocess(self, layer):
+        """Apply the preprocessors on the layer"""
         i = 0
         while i != len(self.preprocessors):
             new_layer = self.preprocessors[i]().preprocess(layer)
@@ -24,6 +27,8 @@ class BacktrackingSolver(object):
         return layer
 
     def solve(self, layer):
+        """Apply a backtracking algorithm with preprocessors
+        optimizations to reduce possibilities to compute"""
         layer = self.preprocess(layer)
 
         solutions = []
