@@ -1,0 +1,60 @@
+#!/usr/bin/python
+import sys
+import logging
+from time import time
+from optparse import OptionParser
+
+from sudokulib.grid import StringGrid
+from sudokulib.grid import InvalidGrid
+from sudokulib.solver import SudokuSolver
+
+
+if __name__ == '__main__':
+    parser = OptionParser(usage='usage: %prog [options] source')
+    parser.add_option('-f', '--free', dest='free_char', type='string',
+                      help='The character signaling free place', default='.')
+    parser.add_option('--nobacktracking', action='store_false',
+                      dest='backtracking', default=True,
+                      help='Do not use backtracking for finding solution')
+
+    (options, args) = parser.parse_args()
+
+    if not len(args):
+        sys.exit('No source file provided')
+    source = args[0]
+
+    console = logging.StreamHandler(sys.stdout)
+    logger = logging.getLogger(__name__)
+    logger.addHandler(console)
+    logger.setLevel(logging.INFO)
+
+    resolution_times = []
+
+    grid_fd = open(source, 'r')
+    grids_str = grid_fd.readlines()
+    grid_fd.close()
+
+    logger.info('%s grids found in %s' % (len(grids_str), source))
+
+    for i in range(len(grids_str)):
+        try:
+            solver = SudokuSolver(grids_str[i].strip(),
+                                  grid_class=StringGrid,
+                                  free_char=options.free_char,
+                                  backtracking=options.backtracking)
+        except InvalidGrid, e:
+            logger.debug('Grid #%s is invalid' % i)
+            continue
+        start_time = time()
+        solver.run()
+        resolution_time = time() - start_time
+        resolution_times.append(resolution_time)
+        logger.debug('Grid #%s resolved in %s seconds' % (i, resolution_time))
+
+    total_time = sum(resolution_times)
+    max_time = max(resolution_times)
+    frequency = float(total_time) / len(grids_str)
+
+    logger.info('Resolved in %.5f seconds (avg %.5f secs, max %.5f secs)' % (
+        total_time, frequency, max_time))
+

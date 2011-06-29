@@ -13,6 +13,7 @@ setup(
     test_suite='sudokulib.tests.test_suite',
     scripts=['./sudokulib/scripts/sudoku_solver',
              './sudokulib/scripts/sudoku_backtrack',
+             './sudokulib/scripts/sudoku_solver_benchmark',
              './sudokulib/scripts/sudoku_indexes'],
 
     packages=find_packages(exclude=['tests']),
