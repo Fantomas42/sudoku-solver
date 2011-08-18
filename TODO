@@ -10,12 +10,12 @@ OK - Several Grid Loader
 OK - Test Grids
 OK - Docstrings
 EC - Tests no resolutions
-- Can change the backtracksolver class
+OK - Can change the backtracksolver class
+- Multiple solvers at 1 turn
 - Solve the Fred case
 - Global benchmark on hard grid
     http://norvig.com/sudoku.html
     http://www2.warwick.ac.uk/fac/sci/moac/students/peter_cock/python/sudoku/
-- Multiple solvers at 1 turn
 - Optimizations
 - Pypi Release
 - New preprocessors

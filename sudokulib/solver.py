@@ -17,13 +17,14 @@ class SudokuSolver(object):
     """Solver of Sudoku Puzzles"""
 
     def __init__(self, filename, free_char='.',
-                 grid_class=FileSystemGrid, backtracking=True,
+                 grid_class=FileSystemGrid,
+                 backtracking_solver_class=BacktrackingSolver,
                  preprocessors=[LineBlockPreprocessor,
                                 BlockBlockPreprocessor,
                                 NakedSubsetPreprocessor],
                  solvers=[NakedSingletonSolver,
                           HiddenSingletonSolver]):
-        self.backtracking = backtracking
+        self.backtracking_solver_class = backtracking_solver_class
         self.solvers = solvers
         self.preprocessors = preprocessors
         self.free_char = free_char
@@ -70,10 +71,11 @@ class SudokuSolver(object):
             if solutions:
                 return solutions
 
-        if self.backtracking:
+        if self.backtracking_solver_class:
             logger.info('Sorry, but I am actually too dumb to solve ' \
                         'this grid, I will use a BackTracking method.')
-            return BacktrackingSolver(self.preprocessors).solve(layer)
+            return self.backtracking_solver_class(
+                self.preprocessors).solve(layer)
 
         return solutions
 

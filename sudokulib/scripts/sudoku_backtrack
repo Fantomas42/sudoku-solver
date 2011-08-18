@@ -23,8 +23,7 @@ if __name__ == '__main__':
 
     start_time = time()
 
-    solver_kw = {'free_char': options.free_char,
-                 'solvers': [], 'backtracking': True}
+    solver_kw = {'free_char': options.free_char, 'solvers': []}
     if not options.preprocessing:
         solver_kw['preprocessors'] = []
 

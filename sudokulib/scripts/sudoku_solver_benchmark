@@ -36,12 +36,13 @@ if __name__ == '__main__':
 
     logger.info('%s grids found in %s' % (len(grids_str), source))
 
+    solver_kw = {'free_char': options.free_char, 'grid_class': StringGrid}
+    if not options.backtracking:
+        solver_kw['backtracking_solver_class'] = None
+
     for i in range(len(grids_str)):
         try:
-            solver = SudokuSolver(grids_str[i].strip(),
-                                  grid_class=StringGrid,
-                                  free_char=options.free_char,
-                                  backtracking=options.backtracking)
+            solver = SudokuSolver(grids_str[i].strip(), **solver_kw)
         except InvalidGrid, e:
             logger.debug('Grid #%s is invalid' % i)
             continue

@@ -28,9 +28,12 @@ if __name__ == '__main__':
 
     start_time = time()
 
+    solver_kw = {'free_char': options.free_char}
+    if not options.backtracking:
+        solver_kw['backtracking_solver_class'] = None
+
     try:
-        solver = SudokuSolver(source, free_char=options.free_char,
-                              backtracking=options.backtracking)
+        solver = SudokuSolver(source, **solver_kw)
     except InvalidGrid, e:
         sys.exit(e)
 
