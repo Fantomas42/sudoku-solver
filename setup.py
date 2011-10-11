@@ -4,10 +4,12 @@ import os
 from setuptools import setup
 from setuptools import find_packages
 
+import sudokulib
+
 
 setup(
     name='sudoku-solver',
-    version='0.1',
+    version=sudokulib.__version__,
     zip_safe=False,
 
     test_suite='sudokulib.tests.test_suite',
@@ -19,11 +21,11 @@ setup(
     packages=find_packages(exclude=['tests']),
     include_package_data=True,
 
-    author='Fantomas42',
-    author_email='fantomas42@gmail.com',
-    url='http://fantomas.willbreak.it/',
+    author=sudokulib.__author__,
+    author_email=sudokulib.__email__,
+    url=sudokulib.__url__,
 
-    license='GPL',
+    license=sudokulib.__license__,
     platforms='any',
     description='Library and scripts for solving Sudoku puzzles.',
     long_description=open(os.path.join('README.rst')).read(),
