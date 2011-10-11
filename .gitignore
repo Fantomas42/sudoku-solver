@@ -4,6 +4,7 @@
 bin/
 include/
 lib/
+dist/
 sudoku_solver.egg-info/
 benchmark.png
 tests.png
