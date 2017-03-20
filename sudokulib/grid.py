@@ -143,5 +143,5 @@ class StringGrid(BaseGrid):
     def load_source(self):
         """Load a grid based on self.filename and consider
         '0' + self.free_char as a missing item in the grid"""
-        return self.filename.translate(str.maketrans(
+        return self.filename.translate(string.maketrans(
             '0%s' % self.free_char, self.mystery_char * 2))
