@@ -47,11 +47,12 @@ class BaseGrid(object):
         if GRID_TOTAL - self.missing < 17:
             raise InvalidGrid(INVALID_GRID_CLUES)
 
-        v = [(k, c) for y in range(GRID_WIDTH)
-             for x, c in enumerate(
-                 self.data[y * GRID_WIDTH:(y + 1) * GRID_WIDTH])
-             for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH)
-             if c != self.mystery_char]
+        v = []
+        for y in range(GRID_WIDTH):
+            for x, c in enumerate(self.data[y * GRID_WIDTH:(y + 1) * GRID_WIDTH]):
+                for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH):
+                    if c != self.mystery_char:
+                        v.append((k, c))
         if len(v) > len(set(v)):
             raise InvalidGrid(INVALID_GRID_PUZZLE)
 
@@ -142,5 +143,5 @@ class StringGrid(BaseGrid):
     def load_source(self):
         """Load a grid based on self.filename and consider
         '0' + self.free_char as a missing item in the grid"""
-        return self.filename.translate(string.maketrans(
+        return self.filename.translate(str.maketrans(
             '0%s' % self.free_char, self.mystery_char * 2))
