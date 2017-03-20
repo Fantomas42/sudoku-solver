@@ -1,5 +1,8 @@
 """Grid for sudokulib"""
-import string
+try:
+    from string import maketrans
+except ImportError:  # Python 3
+    maketrans = str.maketrans
 
 from sudokulib.layer import Layer
 from sudokulib.constants import GRID_TOTAL
@@ -143,5 +146,5 @@ class StringGrid(BaseGrid):
     def load_source(self):
         """Load a grid based on self.filename and consider
         '0' + self.free_char as a missing item in the grid"""
-        return self.filename.translate(string.maketrans(
+        return self.filename.translate(maketrans(
             '0%s' % self.free_char, self.mystery_char * 2))
