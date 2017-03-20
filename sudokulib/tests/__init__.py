@@ -1,23 +1,23 @@
 """Tests for sudokulib"""
 import unittest
 
+from sudokulib.tests.backtracking import BacktrackingPreprocessorSolverTestCase
+from sudokulib.tests.backtracking import BacktrackingSolverTestCase
 from sudokulib.tests.grid import BaseGridTestCase
-from sudokulib.tests.grid import StringGridTestCase
 from sudokulib.tests.grid import FileSystemGridTestCase
-from sudokulib.tests.layer import LayerTestCase
+from sudokulib.tests.grid import StringGridTestCase
 from sudokulib.tests.layer import AdvancedLayerTestCase
+from sudokulib.tests.layer import LayerTestCase
+from sudokulib.tests.preprocessors import BasePreprocessorTestCase
+from sudokulib.tests.preprocessors import BlockBlockPreprocessorTestCase
+from sudokulib.tests.preprocessors import DisjointChainPreprocessorTestCase
+from sudokulib.tests.preprocessors import LineBlockPreprocessorTestCase
+from sudokulib.tests.preprocessors import NakedSubsetPreprocessorTestCase
 from sudokulib.tests.solver import SudokuSolverTestCase
 from sudokulib.tests.solvers import BaseSolverTestCase
-from sudokulib.tests.solvers import SingletonSolverTestCase
-from sudokulib.tests.solvers import NakedSingletonSolverTestCase
 from sudokulib.tests.solvers import HiddenSingletonSolverTestCase
-from sudokulib.tests.backtracking import BacktrackingSolverTestCase
-from sudokulib.tests.backtracking import BacktrackingPreprocessorSolverTestCase
-from sudokulib.tests.preprocessors import BasePreprocessorTestCase
-from sudokulib.tests.preprocessors import LineBlockPreprocessorTestCase
-from sudokulib.tests.preprocessors import BlockBlockPreprocessorTestCase
-from sudokulib.tests.preprocessors import NakedSubsetPreprocessorTestCase
-from sudokulib.tests.preprocessors import DisjointChainPreprocessorTestCase
+from sudokulib.tests.solvers import NakedSingletonSolverTestCase
+from sudokulib.tests.solvers import SingletonSolverTestCase
 
 loader = unittest.TestLoader()
 

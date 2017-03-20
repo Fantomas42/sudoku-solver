@@ -1,14 +1,14 @@
 """Solver for sudokulib"""
 import logging
 
-from sudokulib.grid import FileSystemGrid
-from sudokulib.constants import GRID_TOTAL
 from sudokulib.backtracking import BacktrackingSolver
-from sudokulib.solvers.naked_singleton import NakedSingletonSolver
-from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
-from sudokulib.preprocessors.line_block import LineBlockPreprocessor
+from sudokulib.constants import GRID_TOTAL
+from sudokulib.grid import FileSystemGrid
 from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
+from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
+from sudokulib.solvers.hidden_singleton import HiddenSingletonSolver
+from sudokulib.solvers.naked_singleton import NakedSingletonSolver
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +72,7 @@ class SudokuSolver(object):
                 return solutions
 
         if self.backtracking_solver_class:
-            logger.info('Sorry, but I am actually too dumb to solve ' \
+            logger.info('Sorry, but I am actually too dumb to solve '
                         'this grid, I will use a BackTracking method.')
             return self.backtracking_solver_class(
                 self.preprocessors).solve(layer)

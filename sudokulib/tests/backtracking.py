@@ -1,8 +1,8 @@
 """Tests for sudokulib.backtracking"""
 from unittest import TestCase
 
-from sudokulib.layer import Layer
 from sudokulib.backtracking import BacktrackingSolver
+from sudokulib.layer import Layer
 from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 
 SOLUTION = ' ' * 81

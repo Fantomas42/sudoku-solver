@@ -3,11 +3,11 @@ import os
 import tempfile
 from unittest import TestCase
 
-from sudokulib.layer import Layer
 from sudokulib.grid import BaseGrid
-from sudokulib.grid import StringGrid
-from sudokulib.grid import InvalidGrid
 from sudokulib.grid import FileSystemGrid
+from sudokulib.grid import InvalidGrid
+from sudokulib.grid import StringGrid
+from sudokulib.layer import Layer
 
 
 class BaseGridTestCase(TestCase):
@@ -23,16 +23,16 @@ class StringGridTestCase(TestCase):
     def test_load_source(self):
         grid = StringGrid(self.grid_str, '.')
         self.assertEqual(grid.data,
-                          '1638X5X7XXX8X4XX65XX5XX7XX845XX82X393X1XX' \
-                          'XX4X7XXXXXXXX839X5XXXX6X42XX59XXXXX93X81')
+                         '1638X5X7XXX8X4XX65XX5XX7XX845XX82X393X1XX'
+                         'XX4X7XXXXXXXX839X5XXXX6X42XX59XXXXX93X81')
         grid = StringGrid(self.grid_str, '@')
         self.assertEqual(grid.data,
-                          '1638.5.7...8.4..65..5..7..845..82.393.1..' \
-                          '..4.7........839.5....6.42..59.....93.81')
+                         '1638.5.7...8.4..65..5..7..845..82.393.1..'
+                         '..4.7........839.5....6.42..59.....93.81')
         grid = StringGrid(self.grid_str, '.', '@')
         self.assertEqual(grid.data,
-                          '1638@5@7@@@8@4@@65@@5@@7@@845@@82@393@1@@' \
-                          '@@4@7@@@@@@@@839@5@@@@6@42@@59@@@@@93@81')
+                         '1638@5@7@@@8@4@@65@@5@@7@@845@@82@393@1@@'
+                         '@@4@7@@@@@@@@839@5@@@@6@42@@59@@@@@93@81')
 
     def test_validate(self):
         grid = StringGrid(self.grid_str)
@@ -41,7 +41,7 @@ class StringGridTestCase(TestCase):
         self.assertRaises(InvalidGrid, grid.validate)
         grid = StringGrid('0' * 81)
         self.assertRaises(InvalidGrid, grid.validate)
-        grid = StringGrid('12333000000000000000000000000000000000000' \
+        grid = StringGrid('12333000000000000000000000000000000000000'
                           '0000000237777777777777777777900000000000')
         self.assertRaises(InvalidGrid, grid.validate)
 
@@ -62,12 +62,12 @@ class StringGridTestCase(TestCase):
     def test_apply_solutions(self):
         grid = StringGrid(self.grid_str)
         self.assertEqual(grid.data_solution,
-                          '    X X XXX X XX  XX XX XX   XX  X   X XX' \
-                          'XX X XXXXXXXX   X XXXX X  XX  XXXXX  X  ')
+                         '    X X XXX X XX  XX XX XX   XX  X   X XX'
+                         'XX X XXXXXXXX   X XXXX X  XX  XXXXX  X  ')
         grid.apply_solutions([(4, 1), (6, '8')])
         self.assertEqual(grid.data_solution,
-                          '    1 8 XXX X XX  XX XX XX   XX  X   X XX' \
-                          'XX X XXXXXXXX   X XXXX X  XX  XXXXX  X  ')
+                         '    1 8 XXX X XX  XX XX XX   XX  X   X XX'
+                         'XX X XXXXXXXX   X XXXX X  XX  XXXXX  X  ')
 
     def test__len__(self):
         grid = StringGrid(self.grid_str)
@@ -102,7 +102,7 @@ class FileSystemGridTestCase(TestCase):
 
         try:
             self.assertEqual(grid.data,
-                              'XXXXXXXXXX9XX3XX4XXX26X15XXXX4XXX2XXX3XX5' \
-                              'XX1XXX6XXX7XXXX58X26XXX7XX4XX9XXXXXXXXXX')
+                             'XXXXXXXXXX9XX3XX4XXX26X15XXXX4XXX2XXX3XX5'
+                             'XX1XXX6XXX7XXXX58X26XXX7XX4XX9XXXXXXXXXX')
         finally:
             os.remove(grid_file_path)

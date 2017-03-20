@@ -1,6 +1,6 @@
 """Layer for sudokulib"""
-from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import GRID_TOTAL
+from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import INDEX_REGIONS
 from sudokulib.constants import REGION_INDEXES
 
@@ -39,9 +39,9 @@ class Layer(object):
         for i in range(GRID_TOTAL):
             if self.table[i] == self.mystery_char:
                 ir = INDEX_REGIONS[i]
-                excluded = set(self.region_table['row'][ir['row']]) | \
-                           set(self.region_table['col'][ir['col']]) | \
-                           set(self.region_table['block'][ir['block']])
+                excluded = (set(self.region_table['row'][ir['row']])
+                            | set(self.region_table['col'][ir['col']])
+                            | set(self.region_table['block'][ir['block']]))
                 self._excluded[i] = excluded
                 self._candidates[i] = self.all_chars - excluded
             else:

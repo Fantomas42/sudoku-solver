@@ -3,10 +3,10 @@ from unittest import TestCase
 
 from sudokulib.layer import Layer
 from sudokulib.preprocessors import BasePreprocessor
-from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 from sudokulib.preprocessors.block_block import BlockBlockPreprocessor
-from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 from sudokulib.preprocessors.disjoint_chain import DisjointChainPreprocessor
+from sudokulib.preprocessors.line_block import LineBlockPreprocessor
+from sudokulib.preprocessors.naked_subset import NakedSubsetPreprocessor
 
 SOLUTION = ' ' * 81
 
@@ -33,9 +33,9 @@ class LineBlockPreprocessorTestCase(TestCase):
         layer = Layer(data, SOLUTION)
         self.assertEqual(layer._candidates[27], set(['5', '6', '7']))
         self.assertEqual(layer._candidates[28], set(['3', '4', '5',
-                                                      '6', '7', '8']))
+                                                     '6', '7', '8']))
         self.assertEqual(layer._candidates[29], set(['3', '4', '5',
-                                                      '6', '8']))
+                                                     '6', '8']))
         self.assertEqual(layer._candidates[33], set(['3', '6', '7']))
         self.assertEqual(layer._candidates[34], set(['3', '5', '6']))
         self.assertEqual(layer._candidates[35], set(['7', '9']))
@@ -43,7 +43,7 @@ class LineBlockPreprocessorTestCase(TestCase):
         layer = preprocessor.preprocess(layer)
         self.assertEqual(layer._candidates[27], set(['5', '7']))
         self.assertEqual(layer._candidates[28], set(['3', '4', '5',
-                                                      '7', '8']))
+                                                     '7', '8']))
         self.assertEqual(layer._candidates[29], set(['3', '4', '5', '8']))
         self.assertEqual(layer._candidates[33], set(['3', '6', '7']))
         self.assertEqual(layer._candidates[34], set(['3', '5', '6']))
@@ -57,7 +57,7 @@ class LineBlockPreprocessorTestCase(TestCase):
 
         layer = Layer(data, SOLUTION)
         self.assertEqual(layer._candidates[28], set(['3', '4', '5',
-                                                      '7', '8']))
+                                                     '7', '8']))
         self.assertEqual(layer._candidates[37], set(['1', '3', '5', '7']))
         self.assertEqual(layer._candidates[46], set(['1', '5', '7']))
         self.assertEqual(layer._candidates[55], set(['6', '7', '8']))
@@ -108,12 +108,12 @@ class BlockBlockPreprocessorTestCase(TestCase):
         self.assertEqual(layer._candidates[30], set(['1', '2', '6', '9']))
         self.assertEqual(layer._candidates[31], set(['1', '4']))
         self.assertEqual(layer._candidates[32], set(['1', '4', '6',
-                                                      '7', '9']))
+                                                     '7', '9']))
         self.assertEqual(layer._candidates[48], set(['1', '2', '3',
-                                                      '5', '6']))
+                                                     '5', '6']))
         self.assertEqual(layer._candidates[49], set(['1', '3', '4', '5']))
         self.assertEqual(layer._candidates[50], set(['1', '3', '4',
-                                                      '6', '7']))
+                                                     '6', '7']))
 
         layer = preprocessor.preprocess(layer)
         self.assertEqual(layer._candidates[30], set(['2', '6', '9']))
