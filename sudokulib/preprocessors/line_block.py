@@ -1,6 +1,6 @@
 """LineBlock Preprocessor for sudokulib"""
-from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import BLOCK_WIDTH
+from sudokulib.constants import GRID_WIDTH
 from sudokulib.constants import INDEX_REGIONS
 from sudokulib.constants import REGION_INDEXES
 from sudokulib.preprocessors import BasePreprocessor
@@ -52,21 +52,21 @@ class LineBlockPreprocessor(BasePreprocessor):
 
                 twin_candidates_valids = set()
                 for twin_candidate in twins_candidates:
-                    if not twin_candidate in all_candidates:
+                    if twin_candidate not in all_candidates:
                         twin_candidates_valids.add(twin_candidate)
 
                 if not twin_candidates_valids:
                     continue
 
                 line_other_indexes = INDEX_REGIONS[index_1]['row']
-                line_other_indexes = set(REGION_INDEXES['row'][i]) - \
-                                     set([index_1, index_2, index_3])
+                line_other_indexes = (set(REGION_INDEXES['row'][i])
+                                      - set([index_1, index_2, index_3]))
                 layer_has_changed = False
                 for index in line_other_indexes:
                     if twin_candidates_valids & layer._candidates[index]:
                         layer_has_changed = True
-                        layer._candidates[index] = layer._candidates[index] - \
-                                                   twin_candidates_valids
+                        layer._candidates[index] = (layer._candidates[index]
+                                                    - twin_candidates_valids)
 
                 if layer_has_changed:
                     return layer
@@ -104,21 +104,21 @@ class LineBlockPreprocessor(BasePreprocessor):
 
                 twin_candidates_valids = set()
                 for twin_candidate in twins_candidates:
-                    if not twin_candidate in all_candidates:
+                    if twin_candidate not in all_candidates:
                         twin_candidates_valids.add(twin_candidate)
 
                 if not twin_candidates_valids:
                     continue
 
                 line_other_indexes = INDEX_REGIONS[index_1]['col']
-                line_other_indexes = set(REGION_INDEXES['col'][i]) - \
-                                     set([index_1, index_2, index_3])
+                line_other_indexes = (set(REGION_INDEXES['col'][i])
+                                      - set([index_1, index_2, index_3]))
                 layer_has_changed = False
                 for index in line_other_indexes:
                     if twin_candidates_valids & layer._candidates[index]:
                         layer_has_changed = True
-                        layer._candidates[index] = layer._candidates[index] - \
-                                                   twin_candidates_valids
+                        layer._candidates[index] = (layer._candidates[index]
+                                                    - twin_candidates_valids)
 
                 if layer_has_changed:
                     return layer

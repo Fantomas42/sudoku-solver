@@ -1,6 +1,6 @@
 """Backtracking for sudokulib"""
-from sudokulib.layer import Layer
 from sudokulib.constants import GRID_TOTAL
+from sudokulib.layer import Layer
 
 VOID_SOLUTION = ' ' * GRID_TOTAL
 

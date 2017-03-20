@@ -1,8 +1,8 @@
 """Tests for sudokulib.backtracking"""
 from unittest import TestCase
 
-from sudokulib.layer import Layer
 from sudokulib.backtracking import BacktrackingSolver
+from sudokulib.layer import Layer
 from sudokulib.preprocessors.line_block import LineBlockPreprocessor
 
 SOLUTION = ' ' * 81
@@ -19,7 +19,7 @@ class BacktrackingSolverTestCase(TestCase):
 
         layer = Layer(data, SOLUTION)
 
-        self.assertEquals(solver.solve(layer), [
+        self.assertEqual(solver.solve(layer), [
             [8, '9'], [11, '9'], [14, '4'], [17, '5'], [16, '3'], [25, '4'],
             [80, '6'], [62, '4'], [75, '8'], [59, '7'], [57, '6'], [21, '5'],
             [3, '7'], [18, '3'], [20, '8'], [23, '9'], [22, '6'], [38, '7'],
@@ -39,7 +39,7 @@ class BacktrackingPreprocessorSolverTestCase(TestCase):
 
         layer = Layer(data, SOLUTION)
 
-        self.assertEquals(solver.solve(layer), [
+        self.assertEqual(solver.solve(layer), [
             [4, '3'], [0, '5'], [8, '9'], [11, '9'], [14, '4'], [17, '5'],
             [16, '3'], [18, '3'], [20, '8'], [1, '1'], [23, '9'], [22, '6'],
             [21, '5'], [25, '4'], [38, '7'], [29, '5'], [28, '8'], [31, '7'],

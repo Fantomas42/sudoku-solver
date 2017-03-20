@@ -1,10 +1,14 @@
 """Grid for sudokulib"""
 import string
+try:
+    from string import maketrans
+except ImportError:  # Python 3
+    maketrans = str.maketrans
 
-from sudokulib.layer import Layer
+from sudokulib.constants import BLOCK_WIDTH
 from sudokulib.constants import GRID_TOTAL
 from sudokulib.constants import GRID_WIDTH
-from sudokulib.constants import BLOCK_WIDTH
+from sudokulib.layer import Layer
 
 INVALID_GRID_SIZE = u'The grid has an invalid size.'
 INVALID_GRID_CLUES = u'Not enough clues to solve the grid.'
@@ -47,11 +51,13 @@ class BaseGrid(object):
         if GRID_TOTAL - self.missing < 17:
             raise InvalidGrid(INVALID_GRID_CLUES)
 
-        v = [(k, c) for y in range(GRID_WIDTH)
-             for x, c in enumerate(
-                 self.data[y * GRID_WIDTH:(y + 1) * GRID_WIDTH])
-             for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH)
-             if c != self.mystery_char]
+        v = []
+        for y in range(GRID_WIDTH):
+            for x, c in enumerate(
+                    self.data[y * GRID_WIDTH:(y + 1) * GRID_WIDTH]):
+                for k in x, y + GRID_WIDTH, (x / BLOCK_WIDTH, y / BLOCK_WIDTH):
+                    if c != self.mystery_char:
+                        v.append((k, c))
         if len(v) > len(set(v)):
             raise InvalidGrid(INVALID_GRID_PUZZLE)
 
@@ -69,7 +75,7 @@ class BaseGrid(object):
     @property
     def completed(self):
         """Check if the grid is completed"""
-        return not self.mystery_char in self.data_solution
+        return self.mystery_char not in self.data_solution
 
     @property
     def layer(self):
@@ -102,8 +108,8 @@ class BaseGrid(object):
 
             if c == self.mystery_char:
                 if self.data_solution[i] != self.mystery_char:
-                    grid_string.append(' \033[1;32m%s\033[0m ' % \
-                                  self.data_solution[i])
+                    grid_string.append(' \033[1;32m%s\033[0m ' %
+                                       self.data_solution[i])
                 else:
                     grid_string.append(' \033[1;31m%s\033[0m ' % c)
             else:
@@ -142,5 +148,5 @@ class StringGrid(BaseGrid):
     def load_source(self):
         """Load a grid based on self.filename and consider
         '0' + self.free_char as a missing item in the grid"""
-        return self.filename.translate(string.maketrans(
+        return self.filename.translate(maketrans(
             '0%s' % self.free_char, self.mystery_char * 2))

@@ -81,9 +81,9 @@ class BlockBlockPreprocessor(BasePreprocessor):
                 line_2_common = line_2_bloc_1 & line_2_bloc_2 & line_2_bloc_3
                 line_3_common = line_3_bloc_1 & line_3_bloc_2 & line_3_bloc_3
 
-                line_sum = int(bool(line_1_common)) + \
-                           int(bool(line_2_common)) + \
-                           int(bool(line_3_common))
+                line_sum = (int(bool(line_1_common))
+                            + int(bool(line_2_common))
+                            + int(bool(line_3_common)))
                 if line_sum == 1:
                     # We can pass to the next iteration
                     continue

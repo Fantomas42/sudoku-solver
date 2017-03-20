@@ -1,8 +1,8 @@
 """Setup script for bsq"""
 import os
 
-from setuptools import setup
 from setuptools import find_packages
+from setuptools import setup
 
 import sudokulib
 
@@ -32,7 +32,8 @@ setup(
     keywords='sudoku, solver',
     classifiers=[
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: Software Development :: Libraries :: Python Modules',
         ],
     )
