@@ -1,4 +1,5 @@
 """Grid for sudokulib"""
+import string
 try:
     from string import maketrans
 except ImportError:  # Python 3
